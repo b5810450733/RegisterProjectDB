@@ -53,16 +53,15 @@ public class RegisterController {
                 idfield.setStyle("-fx-border-color: green");
                 System.out.println("Complete");
                 stage.close();
-            }else if (id.length() < 10){
+            }else if (optional.get().equals(ButtonType.NO)){
+                ConfirmationAlert.close();
+            }else if(id.length() < 10){
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setTitle("Warning");
                 warning.setHeaderText("");
                 warning.setContentText("ID must contains 10 digits");
                 idfield.setStyle("-fx-border-color: red");
                 warning.showAndWait();
-            }
-            if (optional.get().equals(ButtonType.NO)){
-                ConfirmationAlert.close();
             }
         }if (register.equals(clearbt)){
             idfield.clear();
