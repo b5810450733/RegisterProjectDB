@@ -40,7 +40,7 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <Button fx:id="allcoursebt" layoutX="222.0" layoutY="395.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="268.0" style="-fx-cursor: Hand;" text="Schedule of all courses">
+      <Button fx:id="allcoursebt" layoutX="222.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="45.0" prefWidth="268.0" style="-fx-cursor: Hand;" text="Schedule of all courses">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

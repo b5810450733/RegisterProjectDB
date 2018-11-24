@@ -38,7 +38,6 @@ public class RegisterController {
         String lastName;
         String year;
         if (register.equals(submitbt)){
-            DBControl dbControl = DBConnect.openDB();
             id = idfield.getText();
             firstName = fname.getText();
             lastName = lname.getText();
@@ -48,20 +47,23 @@ public class RegisterController {
                     ButtonType.YES, ButtonType.NO);
             ConfirmationAlert.setHeaderText("");
             Optional optional = ConfirmationAlert.showAndWait();
-            if (optional.get().equals(ButtonType.YES) && id.length() == 10) {
-                System.out.println(dbControl.addStudent(new Student(id,firstName,lastName,year)));
-                idfield.setStyle("-fx-border-color: green");
-                System.out.println("Complete");
-                stage.close();
+            if (optional.get().equals(ButtonType.YES)) {
+                if (id.length() == 10){
+                    DBControl dbControl = DBConnect.openDB();
+                    System.out.println(dbControl.addStudent(new Student(id,firstName,lastName,year)));
+                    idfield.setStyle("-fx-border-color: green");
+                    System.out.println("Complete");
+                    stage.close();
+                }else{
+                    Alert warning = new Alert(Alert.AlertType.WARNING);
+                    warning.setTitle("Warning");
+                    warning.setHeaderText("");
+                    warning.setContentText("ID must contains 10 digits");
+                    idfield.setStyle("-fx-border-color: red");
+                    warning.showAndWait();
+                }
             }else if (optional.get().equals(ButtonType.NO)){
                 ConfirmationAlert.close();
-            }else if(id.length() < 10){
-                Alert warning = new Alert(Alert.AlertType.WARNING);
-                warning.setTitle("Warning");
-                warning.setHeaderText("");
-                warning.setContentText("ID must contains 10 digits");
-                idfield.setStyle("-fx-border-color: red");
-                warning.showAndWait();
             }
         }if (register.equals(clearbt)){
             idfield.clear();
