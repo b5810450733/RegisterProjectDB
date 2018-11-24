@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("View/MainPage.fxml"));
         primaryStage.setTitle("Register");
-        primaryStage.setScene(new Scene(root, 840, 540));
+        primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
