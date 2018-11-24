@@ -53,4 +53,15 @@ public class Student {
     public void setCredit(String credit) {
         this.credit = credit;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentID='" + studentID + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", year='" + year + '\'' +
+                ", credit='" + credit + '\'' +
+                '}';
+    }
 }

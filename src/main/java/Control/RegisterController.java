@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.Connection;
 import java.util.Optional;
 
@@ -39,9 +38,7 @@ public class RegisterController {
         String lastName;
         String year;
         if (register.equals(submitbt)){
-            DBConnect db = new DBConnect();
-            Connection connection = db.openDatabase();
-            DBControl dbControl = new DBControl(connection);
+            DBControl dbControl = DBConnect.openDB();
             id = idfield.getText();
             firstName = fname.getText();
             lastName = lname.getText();
@@ -56,7 +53,7 @@ public class RegisterController {
                 idfield.setStyle("-fx-border-color: green");
                 System.out.println("Complete");
                 stage.close();
-            }else if (id.length() <10){
+            }else if (id.length() < 10){
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setTitle("Warning");
                 warning.setHeaderText("");
@@ -67,6 +64,11 @@ public class RegisterController {
             if (optional.get().equals(ButtonType.NO)){
                 ConfirmationAlert.close();
             }
+        }if (register.equals(clearbt)){
+            idfield.clear();
+            fname.clear();
+            lname.clear();
+            yearfield.clear();
         }
     }
 }

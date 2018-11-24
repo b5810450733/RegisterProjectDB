@@ -23,7 +23,7 @@ public class DBControl {
             prepare.setString(1, newStudent.getStudentID());
             prepare.setString(2, newStudent.getFirstName());
             prepare.setString(3, newStudent.getLastName());
-            prepare.setString(4,newStudent.getLastName());
+            prepare.setString(4, newStudent.getLastName());
 
             if (prepare.executeUpdate() == 1) {
                 addResult = true;
@@ -35,30 +35,29 @@ public class DBControl {
         }
         return addResult;
     }
+
+
+    public ArrayList<Student> readAccount() { // Review User //
+        ArrayList<Student> incomeArray = new ArrayList<>();
+        Student inFlow = null;
+        try {
+            stmt = connection.createStatement();
+            String query = "SELECT * FROM Student";
+            resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                inFlow = new Student(resultSet.getString(1)
+                        , resultSet.getString(2)
+                        , resultSet.getString(3),resultSet.getString(4));
+                incomeArray.add(inFlow);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAllConfigure(resultSet, stmt, connection);
+        }
+        return incomeArray;
+    }
 }
-//
-//    public ArrayList<Income> readAccount(){ // Review User //
-//        ArrayList<Income> incomeArray = new ArrayList<>();
-//        Income inFlow = null;
-//        try{
-//            stmt = connection.createStatement();
-//            String query = "SELECT * FROM Income";
-//            resultSet = stmt.executeQuery(query);
-//            while (resultSet.next()){
-//                inFlow = new Income(resultSet.getString(2)
-//                        , resultSet.getString(3)
-//                        , Double.parseDouble(resultSet.getString(4)));
-//                inFlow.setID(resultSet.getInt(1));
-//
-//                incomeArray.add(inFlow);
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }finally {
-//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
-//        }
-//        return incomeArray;
-//    }
 //
 //    public boolean updateList(Income list){
 //        boolean updateResult = false;

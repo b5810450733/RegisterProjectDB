@@ -20,10 +20,10 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="idfield" layoutX="290.0" layoutY="151.0" prefHeight="27.0" prefWidth="192.0" />
-      <TextField fx:id="fname" layoutX="290.0" layoutY="204.0" prefHeight="27.0" prefWidth="192.0" />
-      <TextField fx:id="lname" layoutX="290.0" layoutY="261.0" prefHeight="27.0" prefWidth="192.0" />
-      <TextField fx:id="yearfield" layoutX="290.0" layoutY="319.0" prefHeight="27.0" prefWidth="192.0" />
+      <TextField fx:id="idfield" layoutX="290.0" layoutY="151.0" prefHeight="27.0" prefWidth="192.0" promptText="Your ID" />
+      <TextField fx:id="fname" layoutX="290.0" layoutY="204.0" prefHeight="27.0" prefWidth="192.0" promptText="First Name" />
+      <TextField fx:id="lname" layoutX="290.0" layoutY="261.0" prefHeight="27.0" prefWidth="192.0" promptText="Last Name" />
+      <TextField fx:id="yearfield" layoutX="290.0" layoutY="319.0" prefHeight="27.0" prefWidth="192.0" promptText="Year" />
       <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="151.0" prefHeight="27.0" prefWidth="92.0" text="Student ID :">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -44,7 +44,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="clearbt" layoutX="290.0" layoutY="361.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" style="-fx-cursor: Hand;" text="Clear" textFill="#d73838">
+      <Button fx:id="clearbt" layoutX="290.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleRegisterbutton" prefHeight="27.0" prefWidth="54.0" style="-fx-cursor: Hand;" text="Clear" textFill="#d73838">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

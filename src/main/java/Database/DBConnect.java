@@ -52,4 +52,11 @@ public class DBConnect {
             e.printStackTrace();
         }
     }
+
+    public static DBControl openDB(){
+        DBConnect db = new DBConnect();
+        Connection connection = db.openDatabase();
+        DBControl DBControls = new DBControl(connection);
+        return DBControls;
+    }
 }
