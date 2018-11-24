@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="540.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MainController">
+   <children>
+      <ImageView disable="true" fitHeight="540.0" fitWidth="840.0" pickOnBounds="true">
+         <image>
+            <Image url="@../Images/pastel1.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
