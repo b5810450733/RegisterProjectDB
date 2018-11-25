@@ -30,6 +30,9 @@ public class MainController{
     @FXML
     private Button allcoursebt;
 
+    @FXML
+    protected static Student nowLogin;
+
 
     @FXML
     public void handleRegister(ActionEvent event){
@@ -52,12 +55,13 @@ public class MainController{
     public void handlelogin(ActionEvent event){
         if (event.getSource().equals(loginbt)){
             DBControl opendb = DBConnect.openDB();
-            ArrayList<Student> studentList = opendb.readAccount();
+            ArrayList<Student> studentList = opendb.readStudent();
             String inID = idlogin.getText();
             Boolean found = false;
             for (Student student : studentList) {
                 if (inID.equals(student.getStudentID())){
                     found = true;
+                    nowLogin = student;
                 }
             }
             if (found == true){
@@ -65,9 +69,10 @@ public class MainController{
                 Stage stage = new Stage();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/InformationPage.fxml")) ;
                 try {
-                    stage.setScene(new Scene(loader.load(),840,540));
+                    stage.setScene(new Scene(loader.load(),1000,560));
                     stage.setTitle("Your Information");
                     InformationController controller = (InformationController) loader.getController();
+                    controller.infoamationLabel.setText(nowLogin.getStudentID()+" "+nowLogin.getFirstName()+" "+nowLogin.getLastName()+" Year: "+nowLogin.getYear());
                     stage.show();
                 } catch (IOException e1){
                     e1.printStackTrace();
@@ -75,7 +80,7 @@ public class MainController{
             }else {
                 Alert newAlert = new Alert(Alert.AlertType.WARNING);
                 idlogin.setStyle("-fx-border-color: red");
-                newAlert.setTitle("Warning, please check the Information.");
+                newAlert.setTitle("Warning, Please check the Information.");
                 newAlert.setContentText("This ID not exist, Please check your ID or Register if you never registered.");
                 newAlert.setHeaderText("");
                 newAlert.showAndWait();

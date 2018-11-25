@@ -58,7 +58,7 @@ public class RegisterController {
                     Alert warning = new Alert(Alert.AlertType.WARNING);
                     warning.setTitle("Warning");
                     warning.setHeaderText("");
-                    warning.setContentText("ID must contains 10 digits");
+                    warning.setContentText("The ID must contains 10 digits.");
                     idfield.setStyle("-fx-border-color: red");
                     warning.showAndWait();
                 }

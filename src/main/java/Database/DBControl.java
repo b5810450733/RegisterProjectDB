@@ -1,6 +1,7 @@
 package Database;
 
 import Model.Student;
+import Model.Subject;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,12 +19,12 @@ public class DBControl {
         boolean addResult = false;
         try {
             Student newStudent = student;
-            String sqlText = "INSERT INTO Student VALUES (?,?,?,?,?)";
+            String sqlText = "INSERT INTO Student VALUES (?,?,?,?,?,?)";
             PreparedStatement prepare = connection.prepareStatement(sqlText);
             prepare.setString(1, newStudent.getStudentID());
             prepare.setString(2, newStudent.getFirstName());
             prepare.setString(3, newStudent.getLastName());
-            prepare.setString(4, newStudent.getLastName());
+            prepare.setString(4, newStudent.getYear());
 
             if (prepare.executeUpdate() == 1) {
                 addResult = true;
@@ -37,7 +38,7 @@ public class DBControl {
     }
 
 
-    public ArrayList<Student> readAccount() { // Review User //
+    public ArrayList<Student> readStudent(){ // Review  //
         ArrayList<Student> incomeArray = new ArrayList<>();
         Student inFlow = null;
         try {
@@ -48,6 +49,7 @@ public class DBControl {
                 inFlow = new Student(resultSet.getString(1)
                         , resultSet.getString(2)
                         , resultSet.getString(3),resultSet.getString(4));
+                inFlow.setRegistersubject(resultSet.getString(6));
                 incomeArray.add(inFlow);
             }
         } catch (SQLException e) {
@@ -57,63 +59,71 @@ public class DBControl {
         }
         return incomeArray;
     }
+
+    /////////////////////////////////////////////////////////////////////
+
+    public ArrayList<Subject> readSubject() {
+        ArrayList<Subject> subjectsList = new ArrayList<>();
+        Subject inFlow = null;
+        try {
+            stmt = connection.createStatement();
+            String query = "SELECT * FROM Subject";
+            resultSet = stmt.executeQuery(query);
+            while (resultSet.next()) {
+                inFlow = new Subject(resultSet.getString(1)
+                        , resultSet.getString(2)
+                        , resultSet.getString(3),resultSet.getString(4),resultSet.getString(5));
+                subjectsList.add(inFlow);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAllConfigure(resultSet, stmt, connection);
+        }
+        return subjectsList;
+    }
+
+    public boolean addSubject(Subject subject) {
+        boolean addResult = false;
+        try {
+            Subject newSubject = subject;
+            String sqlText = "INSERT INTO Subject VALUES (?,?,?,?,?)";
+            PreparedStatement prepare = connection.prepareStatement(sqlText);
+            prepare.setString(1, newSubject.getSubCode());
+            prepare.setString(2, newSubject.getSubName());
+            prepare.setString(3, newSubject.getCreDit());
+            prepare.setString(4, newSubject.getHardness());
+            prepare.setString(5,newSubject.getYear());
+
+            if (prepare.executeUpdate() == 1) {
+                addResult = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnect.closeAllConfigure(resultSet, stmt, connection);
+        }
+        return addResult;
+    }
+
+        public boolean updateStudentSubject(Student subject){
+        boolean updateResult = false;
+        try{
+            String sqlText = "UPDATE Student SET credit=?,allsubject=? WHERE studentID=?";
+            PreparedStatement prepare = connection.prepareStatement(sqlText);
+            prepare.setString(1,subject.getCredit());
+            prepare.setString(2,subject.getRegistersubject());
+            prepare.setString(3,subject.getStudentID());
+
+            if (prepare.executeUpdate() == 1){
+                updateResult = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DBConnect.closeAllConfigure(resultSet,stmt,connection);
+        }
+        return updateResult;
+    }
 }
-//
-//    public boolean updateList(Income list){
-//        boolean updateResult = false;
-//        try{
-//            String sqlText = "UPDATE Income SET type=?,info=?,value=? WHERE id=?";
-//            PreparedStatement prepare = connection.prepareStatement(sqlText);
-//            prepare.setString(1,list.getType());
-//            prepare.setString(2,list.getInformation());
-//            prepare.setDouble(3,Double.parseDouble(list.getAmount()));
-//            prepare.setInt(4,list.getID());
-//
-//            if (prepare.executeUpdate() == 1){
-//                updateResult = true;
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }finally {
-//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
-//        }
-//        return updateResult;
-//    }
-//
-//    public boolean deleteList(Income list){
-//        boolean updateResult = false;
-//        try{
-//            String sqlText = "DELETE FROM Income WHERE id=?";
-//            PreparedStatement prepare = connection.prepareStatement(sqlText);
-//            prepare.setInt(1,list.getID());
-//
-//            if (prepare.executeUpdate() == 1){
-//                updateResult = true;
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }finally {
-//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
-//        }
-//        return updateResult;
-//    }
-//
-//    public int getLastID(){
-//        int lastID = 0;
-//        try{
-//            stmt = connection.createStatement();
-//            String query = "SELECT * FROM Income ORDER BY id DESC LIMIT 1;";
-//            resultSet = stmt.executeQuery(query);
-//            while (resultSet.next()){
-//                lastID = resultSet.getInt(1);
-//            }
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }finally {
-//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
-//        }
-//        return lastID;
-//
-//    }
-//
-//}
+

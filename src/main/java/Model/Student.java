@@ -6,12 +6,23 @@ public class Student {
     protected String lastName;
     protected String year;
     protected String credit;
+    protected String registersubject;
+
+    public Student(){}
 
     public Student(String studentID, String firstName, String lastName, String year) {
         this.studentID = studentID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.year = year;
+    }
+
+    public String getRegistersubject() {
+        return registersubject;
+    }
+
+    public void setRegistersubject(String registersubject) {
+        this.registersubject = registersubject;
     }
 
     public String getStudentID() {
@@ -62,6 +73,7 @@ public class Student {
                 ", lastName='" + lastName + '\'' +
                 ", year='" + year + '\'' +
                 ", credit='" + credit + '\'' +
+                ", registersubject='" + registersubject + '\'' +
                 '}';
     }
 }
