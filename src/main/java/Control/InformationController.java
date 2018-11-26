@@ -10,13 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InformationController {
     @FXML
@@ -120,10 +118,14 @@ public class InformationController {
     }
 
     @FXML
-    public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้
+    public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้ , มีปุ่ม ลบวิชาออกจาก Pass list ด้วย
         Subject addSubjecttoPass = notView.getSelectionModel().getSelectedItem();
         if (event.getSource().equals(addbt)){
-            if (dataNotPassSubject.contains(addSubjecttoPass) && !dataSubject.contains(addSubjecttoPass)){
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add this subject to your passed subject list.",
+                    ButtonType.YES,ButtonType.NO);
+            newAlert.setHeaderText("");
+            Optional optional = newAlert.showAndWait();
+            if (dataNotPassSubject.contains(addSubjecttoPass) && !dataSubject.contains(addSubjecttoPass) && optional.get().equals(ButtonType.YES)){
                 dataNotPassSubject.remove(addSubjecttoPass);
                 dataSubject.add(addSubjecttoPass);
                 DBControl open = DBConnect.openDB();
