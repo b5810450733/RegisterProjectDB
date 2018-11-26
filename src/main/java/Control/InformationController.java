@@ -87,7 +87,6 @@ public class InformationController {
                                 toShownotPass.get(i).getCreDit(),toShownotPass.get(i).getHardness(),toShownotPass.get(i).getYear());
                         dataSubject.add(studentSubject);
                         toShownotPass.remove(i);
-                        System.out.println(studentSubject);
                     }
                 }
             }
@@ -121,8 +120,21 @@ public class InformationController {
     }
 
     @FXML
-    public void handleAddPass(ActionEvent event){
-
-
+    public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้
+        Subject addSubjecttoPass = notView.getSelectionModel().getSelectedItem();
+        if (event.getSource().equals(addbt)){
+            if (dataNotPassSubject.contains(addSubjecttoPass) && !dataSubject.contains(addSubjecttoPass)){
+                dataNotPassSubject.remove(addSubjecttoPass);
+                dataSubject.add(addSubjecttoPass);
+                DBControl open = DBConnect.openDB();
+                String newSubject = "";
+                for (Subject subject : dataSubject) {
+                    newSubject += subject.getSubCode()+"#";
+                }
+                presentStudent.setRegistersubject(newSubject);
+                open.updateStudentSubject(presentStudent);
+                System.out.println("Complete");
+            }
+        }
     }
 }
