@@ -73,6 +73,7 @@ public class InformationController {
         updateColor();
     }
 
+    // made by 5810450733
     @FXML
     public void updateColor(){
         notHard.setCellFactory(column -> {
@@ -89,11 +90,11 @@ public class InformationController {
                         //We get here all the info of the Person of this row
                         Subject auxPerson = getTableView().getItems().get(getIndex());
                         if (auxPerson.getHardness().equals("3")) {
-                            setStyle("-fx-background-color: rgba(223,32,39,0.65)");
+                            setStyle("-fx-background-color: rgba(223,0,11,0.60)");
                         }else if (auxPerson.getHardness().equals("2")) {
                             setStyle("-fx-background-color: rgba(15,86,223,0.65)");
                         }else if (auxPerson.getHardness().equals("1")) {
-                            setStyle("-fx-background-color: rgba(77,202,0,0.65)");
+                            setStyle("-fx-background-color: rgba(0,202,24,0.65)");
                         }else{
                             setStyle("-fx-background-color: white");
                             if (getTableView().getSelectionModel().getSelectedItems().contains(auxPerson)) {

@@ -19,7 +19,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View/MainPage.fxml"));
         primaryStage.setTitle("Register");
         primaryStage.setScene(new Scene(root, 700, 500));
-//        loader.getController();
         primaryStage.setResizable(false);
         primaryStage.show();
     }
