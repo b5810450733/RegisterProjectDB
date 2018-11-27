@@ -42,6 +42,7 @@ public class MainController{
             try {
                 stage.setScene(new Scene(loader.load(),670,440));
                 stage.setTitle("Register Page");
+                stage.setResizable(false);
                 RegisterController controller = (RegisterController) loader.getController();
                 controller.stage = stage;
                 stage.show();
@@ -71,6 +72,7 @@ public class MainController{
                 try {
                     stage.setScene(new Scene(loader.load(),1000,560));
                     stage.setTitle("Your Information");
+                    stage.setResizable(false);
                     InformationController controller = (InformationController) loader.getController();
                     controller.infoamationLabel.setText(nowLogin.getStudentID()+" "+nowLogin.getFirstName()+" "+nowLogin.getLastName()+" Year: "+nowLogin.getYear());
                     stage.show();
@@ -96,6 +98,7 @@ public class MainController{
             try {
                 stage.setScene(new Scene(loader.load(),840,540));
                 stage.setTitle("All Course Schedule");
+                stage.setResizable(false);
                 AllCourseController controller = (AllCourseController) loader.getController();
                 stage.show();
             } catch (IOException e1){

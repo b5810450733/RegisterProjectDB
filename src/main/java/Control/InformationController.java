@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -69,6 +70,41 @@ public class InformationController {
     public void initialize(){
         this.presentStudent = MainController.nowLogin;
         readStudent();
+        updateColor();
+    }
+
+    @FXML
+    public void updateColor(){
+        notHard.setCellFactory(column -> {
+            return new TableCell<Subject, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty); //This is mandatory
+
+                    if (item == null || empty) { //If the cell is empty
+                        setText(null);
+                        setStyle("");
+                    } else { //If the cell is not empty\
+                        setText(null); //Put the String data in the cell , set to null
+                        //We get here all the info of the Person of this row
+                        Subject auxPerson = getTableView().getItems().get(getIndex());
+                        if (auxPerson.getHardness().equals("3")) {
+                            setStyle("-fx-background-color: rgba(223,32,39,0.65)");
+                        }else if (auxPerson.getHardness().equals("2")) {
+                            setStyle("-fx-background-color: rgba(15,86,223,0.65)");
+                        }else if (auxPerson.getHardness().equals("1")) {
+                            setStyle("-fx-background-color: rgba(77,202,0,0.65)");
+                        }else{
+                            setStyle("-fx-background-color: white");
+                            if (getTableView().getSelectionModel().getSelectedItems().contains(auxPerson)) {
+                                setTextFill(Color.WHITE);
+                            } else
+                                setTextFill(Color.BLACK);
+                        }
+                    }
+                }
+            };
+        });
     }
 
     public void readStudent(){
