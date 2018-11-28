@@ -164,7 +164,6 @@ public class InformationController {
     }
 
 
-
     public void readStudent(){
         DBControl connect = DBConnect.openDB();
         this.allSubjects = connect.readSubject();
@@ -179,18 +178,19 @@ public class InformationController {
                                 shownotPass.getCreDit(),shownotPass.getHardness(),shownotPass.getYear());
                         dataSubject.add(studentSubject);
                         totalCredit += Integer.parseInt(shownotPass.getCreDit());
-                        toShownotPass.remove(studentSubject);
+                        toShownotPass.set(toShownotPass.indexOf(shownotPass),null);
                     }
                 }
             }
             for (Subject shownotPass : toShownotPass) {
-                dataNotPassSubject.add(shownotPass);
+                if (shownotPass != null){
+                    dataNotPassSubject.add(shownotPass);
+                }
             }
             showStudentPassSubject();
+
         }catch (NullPointerException e){
-            for (Subject allSubject : allSubjects) {
-                dataNotPassSubject.add(allSubject);
-            }
+            dataNotPassSubject.addAll(allSubjects);
             showStudentPassSubject();
         }
 
