@@ -7,6 +7,7 @@ public class Student {
     protected String year;
     protected String credit;
     protected String registersubject;
+    protected String path;
 
     public Student(){}
 
@@ -15,6 +16,14 @@ public class Student {
         this.firstName = firstName;
         this.lastName = lastName;
         this.year = year;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getRegistersubject() {

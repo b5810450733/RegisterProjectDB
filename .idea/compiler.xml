@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Register-Project" />
         <module name="RegisterProject" />
+        <module name="RegisterProjectDB" />
       </profile>
     </annotationProcessing>
   </component>

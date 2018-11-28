@@ -19,7 +19,7 @@ public class DBControl {
         boolean addResult = false;
         try {
             Student newStudent = student;
-            String sqlText = "INSERT INTO Student VALUES (?,?,?,?,?,?)";
+            String sqlText = "INSERT INTO Student VALUES (?,?,?,?,?,?,?)";
             PreparedStatement prepare = connection.prepareStatement(sqlText);
             prepare.setString(1, newStudent.getStudentID());
             prepare.setString(2, newStudent.getFirstName());
@@ -50,6 +50,7 @@ public class DBControl {
                         , resultSet.getString(2)
                         , resultSet.getString(3),resultSet.getString(4));
                 inFlow.setRegistersubject(resultSet.getString(6));
+                inFlow.setPath(resultSet.getString(7));
                 incomeArray.add(inFlow);
             }
         } catch (SQLException e) {

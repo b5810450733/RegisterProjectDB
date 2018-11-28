@@ -2,42 +2,83 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.InformationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.InformationController">
    <children>
-      <ImageView fitHeight="560.0" fitWidth="1000.0" opacity="0.9" pickOnBounds="true">
-         <image>
-            <Image url="@../Images/pastel4.jpg" />
-         </image>
-      </ImageView>
-      <TableView fx:id="passView" editable="true" layoutX="15.0" layoutY="41.0" prefHeight="297.0" prefWidth="439.0">
-        <columns>
-          <TableColumn fx:id="PassSubID" prefWidth="94.0" text="Subject ID" />
-          <TableColumn fx:id="PassSubname" prefWidth="159.93917846679688" text="Subject Name" />
-            <TableColumn fx:id="PassSubCredit" prefWidth="67.56085205078125" text="Credit" />
-            <TableColumn fx:id="PassSubyear" prefWidth="56.107696533203125" text="Year" />
-            <TableColumn fx:id="PassSubStatus" prefWidth="59.892303466796875" text="Status" />
-        </columns>
-      </TableView>
-      <TableView fx:id="notView" layoutX="499.0" layoutY="40.0" prefHeight="298.0" prefWidth="479.0">
-         <columns>
-            <TableColumn fx:id="notSubID" prefWidth="94.0" text="Subject ID" />
-            <TableColumn fx:id="notSubname" prefWidth="159.93917846679688" text="Subject Name" />
-            <TableColumn fx:id="notSubCredit" prefWidth="67.56085205078125" text="Credit" />
-            <TableColumn fx:id="notSubyear" prefWidth="77.33779907226562" text="Year" />
-            <TableColumn fx:id="notHard" prefWidth="77.99993896484375" text="Hardness" />
-         </columns>
-      </TableView>
-      <Line endX="-63.05828857421875" endY="-425.0" layoutX="539.0" layoutY="425.0" startX="-63.05828857421875" startY="144.29254150390625" />
-      <Label layoutX="19.0" layoutY="16.0" prefHeight="17.0" prefWidth="109.0" text="Pass" />
-      <Label layoutX="504.0" layoutY="16.0" prefHeight="17.0" prefWidth="201.0" text="Shall Register / Not register yet" />
-      <Button fx:id="addbt" layoutX="500.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="37.0" prefWidth="92.0" text="Add to Pass" />
-      <Label fx:id="infoamationLabel" alignment="CENTER_RIGHT" layoutX="108.0" layoutY="7.0" prefHeight="28.0" prefWidth="346.0" />
+      <SplitPane dividerPositions="0.5" prefHeight="650.0" prefWidth="1000.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="650.0" fitWidth="500.0" layoutX="-4.0" layoutY="-1.0" opacity="0.9" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Images/pastel2.jpg" />
+                     </image>
+                  </ImageView>
+                  <TableView fx:id="passView" editable="true" layoutX="8.0" layoutY="46.0" prefHeight="315.0" prefWidth="479.0">
+                    <columns>
+                      <TableColumn fx:id="PassSubID" prefWidth="94.0" text="Subject ID" />
+                      <TableColumn fx:id="PassSubname" prefWidth="194.3683319091797" text="Subject Name" />
+                        <TableColumn fx:id="PassSubCredit" prefWidth="60.631683349609375" text="Credit" />
+                        <TableColumn fx:id="PassSubyear" prefWidth="62.698577880859375" text="Year" />
+                        <TableColumn fx:id="PassSubStatus" prefWidth="69.02886962890625" text="Status" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="9.0" layoutY="19.0" prefHeight="17.0" prefWidth="109.0" text="Pass" />
+                  <ImageView fx:id="image" fitHeight="174.0" fitWidth="201.0" layoutX="18.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="fname" layoutX="230.0" layoutY="417.0" prefHeight="17.0" prefWidth="122.0" text="Name" />
+                  <Label fx:id="lname" layoutX="231.0" layoutY="453.0" prefHeight="17.0" prefWidth="118.0" text="Last" />
+                  <Label fx:id="Year" layoutX="231.0" layoutY="531.0" prefHeight="17.0" prefWidth="118.0" text="Year" />
+                  <Label fx:id="tcredit" layoutX="230.0" layoutY="496.0" text="Totol Credit" />
+                  <Line endX="393.0000305175781" layoutX="103.0" layoutY="378.0" startX="-107.00001525878906" stroke="#8f854762" strokeWidth="2.2" />
+                  <Button fx:id="dropbt" layoutX="439.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: &quot;#FF5353&quot;;" text="Drop" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="650.0" fitWidth="525.0" layoutY="-2.0" opacity="0.9" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Images/pastel2.jpg" />
+                     </image>
+                  </ImageView>
+                  <TableView fx:id="notView" layoutX="7.0" layoutY="46.0" prefHeight="285.0" prefWidth="481.0">
+                     <columns>
+                        <TableColumn fx:id="notSubID" prefWidth="94.0" text="Subject ID" />
+                        <TableColumn fx:id="notSubname" prefWidth="206.5357666015625" text="Subject Name" />
+                        <TableColumn fx:id="notSubCredit" prefWidth="53.8995361328125" text="Credit" />
+                        <TableColumn fx:id="notSubyear" prefWidth="50.865966796875" text="Year" />
+                        <TableColumn fx:id="notHard" prefWidth="74.0" text="Difficulty" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="9.0" layoutY="19.0" prefHeight="17.0" prefWidth="201.0" text="Shall Register / Not register yet" />
+                  <Line endX="385.01763916015625" layoutX="110.0" layoutY="378.0" startX="-109.99996948242188" stroke="#8f854762" strokeWidth="2.2" />
+                  <TableView fx:id="ChooseTable" layoutX="7.0" layoutY="390.0" prefHeight="197.0" prefWidth="481.0">
+                    <columns>
+                      <TableColumn fx:id="ChooseID" prefWidth="98.0" text="Subject ID" />
+                      <TableColumn fx:id="ChooseName" prefWidth="264.0" text="Subject Name" />
+                        <TableColumn fx:id="ChooseCredit" prefWidth="57.0" text="Credit" />
+                        <TableColumn fx:id="ChooseYear" prefWidth="61.0" text="Year" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="addbt" disable="true" layoutX="226.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #03F3AB;" text="Add to Pass">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Button>
+                  <Button fx:id="viewAllCourse" layoutX="96.0" layoutY="597.0" mnemonicParsing="false" onAction="#viewAllBThandle" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: &quot;#62A9FF&quot;;" text="View All Course" />
+                  <Button fx:id="canclebt" layoutX="7.0" layoutY="597.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="71.0" style="-fx-background-color: &quot;#FF5353&quot;;" text="Cancle" />
+                  <Label fx:id="preTcredit" alignment="CENTER" layoutX="396.0" layoutY="597.0" prefHeight="36.0" prefWidth="92.0" style="-fx-border-color: &quot;#62A9FF&quot;; -fx-border-width: 1.5;" text="Totol Credit" />
+                  <Label fx:id="bsubject" layoutX="7.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Base: subject" />
+                  <Label fx:id="csubject" layoutX="258.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Continue: subject" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

@@ -6,11 +6,13 @@ import Model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,8 +32,11 @@ public class MainController{
     @FXML
     private Button allcoursebt;
 
+
     @FXML
-    protected static Student nowLogin;
+    private AnchorPane mainPane;
+
+    protected Student login;
 
 
     @FXML
@@ -62,19 +67,20 @@ public class MainController{
             for (Student student : studentList) {
                 if (inID.equals(student.getStudentID())){
                     found = true;
-                    nowLogin = student;
+                    this.login = student;
+                    break;
                 }
             }
             if (found == true){
                 idlogin.setStyle("-fx-border-color: null");
-                Stage stage = new Stage();
+                Stage stage = (Stage) mainPane.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/InformationPage.fxml")) ;
                 try {
-                    stage.setScene(new Scene(loader.load(),1000,560));
+                    stage.setScene(new Scene(loader.load(),1000,650));
                     stage.setTitle("Your Information");
                     stage.setResizable(false);
                     InformationController controller = (InformationController) loader.getController();
-                    controller.infoamationLabel.setText(nowLogin.getStudentID()+" "+nowLogin.getFirstName()+" "+nowLogin.getLastName()+" Year: "+nowLogin.getYear());
+                    controller.setPresentStudent(login);
                     stage.show();
                 } catch (IOException e1){
                     e1.printStackTrace();
