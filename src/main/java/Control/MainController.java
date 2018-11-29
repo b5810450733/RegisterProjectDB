@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -76,12 +77,15 @@ public class MainController{
                 Stage stage = (Stage) mainPane.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/InformationPage.fxml")) ;
                 try {
+                    stage.setX(40);
+                    stage.setY(70);
                     stage.setScene(new Scene(loader.load(),1000,650));
                     stage.setTitle("Your Information");
                     stage.setResizable(false);
                     InformationController controller = (InformationController) loader.getController();
                     controller.setPresentStudent(login);
                     stage.show();
+                    openGuideStage();
                 } catch (IOException e1){
                     e1.printStackTrace();
                 }
@@ -115,6 +119,23 @@ public class MainController{
             stage.show();
         } catch (IOException e1){
             e1.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openGuideStage(){
+        Stage stage2 = new Stage();
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/View/Course.fxml")) ;
+        try {
+            stage2.setX(1041);
+            stage2.setY(70);
+            stage2.setScene(new Scene(loader2.load(),370,360));
+            stage2.setTitle("Your Information");
+            stage2.setResizable(false);
+            CourseController controller = (CourseController) loader2.getController();
+            stage2.show();
+        } catch (IOException e2){
+            e2.printStackTrace();
         }
     }
 

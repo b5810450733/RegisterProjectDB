@@ -38,7 +38,7 @@
                   <Label fx:id="Year" layoutX="231.0" layoutY="531.0" prefHeight="17.0" prefWidth="118.0" text="Year" />
                   <Label fx:id="tcredit" layoutX="230.0" layoutY="496.0" text="Totol Credit" />
                   <Line endX="393.0000305175781" layoutX="103.0" layoutY="378.0" startX="-107.00001525878906" stroke="#8f854762" strokeWidth="2.2" />
-                  <Button fx:id="dropbt" disable="true" layoutX="439.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: &quot;#FF5353&quot;;" text="Drop" />
+                  <Button fx:id="dropbt" disable="true" layoutX="439.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleDropbtn" style="-fx-background-color: &quot;#FF5353&quot;;" text="Drop" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

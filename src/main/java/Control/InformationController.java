@@ -97,7 +97,6 @@ public class InformationController {
     private ObservableList<Subject> dataSubject = FXCollections.observableArrayList();
     private ObservableList<Subject> dataNotPassSubject = FXCollections.observableArrayList();
     private ObservableList<Subject> dataChooseSubject = FXCollections.observableArrayList();
-    private int totalCredit;
 
 
     @FXML
@@ -113,7 +112,6 @@ public class InformationController {
         fname.setText(presentStudent.getFirstName());
         lname.setText(presentStudent.getLastName());
         Year.setText(presentStudent.getYear());
-        tcredit.setText(String.valueOf(totalCredit));
     }
 
     @FXML
@@ -145,7 +143,6 @@ public class InformationController {
                         setStyle("");
                     } else { //If the cell is not empty\
                         setText(item); //Put the String data in the cell
-
                         Subject auxPerson = getTableView().getItems().get(getIndex());
                         if (auxPerson.getHardness().equals("3")) {
                             setText("Hard");
@@ -173,6 +170,7 @@ public class InformationController {
     public void readStudent(){
         DBControl connect = DBConnect.openDB();
         this.allSubjects = connect.readSubject();
+        int totalCredit = 0;
         try {
             String[] subjectforStudent = presentStudent.getRegistersubject().split("#");
             ArrayList<Subject> checkNotpass = allSubjects; // to check duplicate subject in passed subject.
@@ -192,6 +190,7 @@ public class InformationController {
                 }
             }
             showStudentPassSubject();
+            tcredit.setText(String.valueOf(totalCredit));
         }catch (NullPointerException | IndexOutOfBoundsException e){
             dataNotPassSubject.addAll(allSubjects);// handle exception when system throws
             showStudentPassSubject();
@@ -206,6 +205,12 @@ public class InformationController {
         PassSubyear.setCellValueFactory(cellData->cellData.getValue().yearProperty());
         PassSubStatus.setCellValueFactory(cellData-> new SimpleStringProperty("Pass"));
         passView.setItems(dataSubject);
+        passView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                dropbt.setDisable(false);
+            }
+        });
         //////////////////////////////////////////////////////////////////////////////////////////
         notSubID.setCellValueFactory(cellData->cellData.getValue().subCodeProperty());
         notSubname.setCellValueFactory(cellData->cellData.getValue().subNameProperty());
@@ -214,7 +219,9 @@ public class InformationController {
         notHard.setCellValueFactory(cellData->cellData.getValue().hardnessProperty());
         notView.setItems(dataNotPassSubject);
         notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        notView.refresh();
+
+
+
         notView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -294,7 +301,33 @@ public class InformationController {
 
     @FXML
     public void handleDropbtn(ActionEvent event){ // มีปุ่ม ลบวิชาออกจาก Pass list ด้วย
+        if (event.getSource().equals(dropbt)){
+            Subject subject = passView.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to drop this subject from Passed table?.",ButtonType.YES,ButtonType.NO);
+            alert.setHeaderText("");
+            Optional optional = alert.showAndWait();
+            if (optional.get().equals(ButtonType.YES)){
+                dataSubject.remove(subject);
+                dataNotPassSubject.add(subject);
+                updateRegister();
+                dropbt.setDisable(true);
+            }
+        }
+    }
 
+    public void updateRegister(){
+        DBControl open = DBConnect.openDB();
+        String newSubject = "";
+        int toSetCredit = 0;
+        for (Subject subjectnew : dataSubject) {
+            newSubject += subjectnew.getSubCode()+"#";
+            toSetCredit += Integer.parseInt(subjectnew.getCreDit());
+        }
+        presentStudent.setRegistersubject(newSubject);
+        presentStudent.setCredit(String.valueOf(toSetCredit));
+        open.updateStudentSubject(presentStudent);
+        tcredit.setText(String.valueOf(toSetCredit));
+        System.out.println("Update Complete");
     }
 
     @FXML
@@ -307,19 +340,10 @@ public class InformationController {
             for (Subject subject : dataChooseSubject) {
                 if (!dataSubject.contains(subject) && optional.get().equals(ButtonType.YES)){
                     dataSubject.add(subject);
-                    DBControl open = DBConnect.openDB();
-                    String newSubject = "";
-                    for (Subject subjectnew : dataSubject) {
-                        newSubject += subjectnew.getSubCode()+"#";
-                    }
-                    totalCredit += Integer.parseInt(subject.getCreDit());
-                    presentStudent.setRegistersubject(newSubject);
-                    presentStudent.setCredit(String.valueOf(totalCredit));
-                    open.updateStudentSubject(presentStudent);
-                    tcredit.setText(String.valueOf(totalCredit));
-                    System.out.println("Complete");
+                    updateRegister();
                 }
             }
+            preTcredit.setText("");
             dataChooseSubject.clear();
             addbt.setDisable(true);
         }else{
@@ -334,5 +358,8 @@ public class InformationController {
         }
         preTcredit.setText(String.valueOf(pre));
     }
+
+
+
 
 }
