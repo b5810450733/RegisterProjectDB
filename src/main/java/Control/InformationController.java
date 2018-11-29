@@ -5,6 +5,7 @@ import Database.DBControl;
 import Model.AllCourse;
 import Model.Student;
 import Model.Subject;
+import com.sun.tools.javac.util.ArrayUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -169,32 +170,29 @@ public class InformationController {
         this.allSubjects = connect.readSubject();
         try {
             String[] subjectforStudent = presentStudent.getRegistersubject().split("#");
-            ArrayList<Subject> toShownotPass = this.allSubjects;
-            for (Subject shownotPass : toShownotPass) {
-                for (String s : subjectforStudent) {
-                    if (shownotPass.getSubCode().equals(s)){
-                        System.out.println(shownotPass.getSubCode());
-                        Subject studentSubject = new Subject(shownotPass.getSubCode(),shownotPass.getSubName(),
-                                shownotPass.getCreDit(),shownotPass.getHardness(),shownotPass.getYear());
-                        dataSubject.add(studentSubject);
-                        totalCredit += Integer.parseInt(shownotPass.getCreDit());
-                        toShownotPass.set(toShownotPass.indexOf(shownotPass),null);
+            ArrayList<Subject> checkNotpass = allSubjects; // to check duplicate subject in passed subject.
+            dataNotPassSubject.addAll(checkNotpass); // to show in not pass table.
+            if (subjectforStudent[0].equals("")&& subjectforStudent.length == 1){ // not wasting time to for loop if array is no data
+                //System will throw new NullPointerException() Or IndexOutOfBoundsException;
+            }else {
+                for (Subject subjectcheck : checkNotpass) {
+                    for (String subject : subjectforStudent) {
+                        if (subjectcheck.getSubCode().equals(subject)) { // if duplicated
+                            //System.out.println(shownotPass.getSubCode()); for debug
+                            dataSubject.add(subjectcheck); // add to passed table
+                            totalCredit += Integer.parseInt(subjectcheck.getCreDit()); // calculate total credit
+                            dataNotPassSubject.remove(subjectcheck); // delete duplicate subject
+                        }
                     }
                 }
             }
-            for (Subject shownotPass : toShownotPass) {
-                if (shownotPass != null){
-                    dataNotPassSubject.add(shownotPass);
-                }
-            }
             showStudentPassSubject();
-
-        }catch (NullPointerException e){
+        }catch (NullPointerException | IndexOutOfBoundsException e){
             dataNotPassSubject.addAll(allSubjects);
             showStudentPassSubject();
         }
-
     }
+
 
     public void showStudentPassSubject(){
         PassSubID.setCellValueFactory(cellData->cellData.getValue().subCodeProperty());
@@ -269,7 +267,7 @@ public class InformationController {
     @FXML
     public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้ , มีปุ่ม ลบวิชาออกจาก Pass list ด้วย
         if (event.getSource().equals(addbt)){
-            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all the subject to your passed subject list?",
+            Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all the subject to your passed subject table?",
                     ButtonType.YES,ButtonType.NO);
             newAlert.setHeaderText("");
             Optional optional = newAlert.showAndWait();
