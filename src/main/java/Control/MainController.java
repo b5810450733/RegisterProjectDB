@@ -99,17 +99,22 @@ public class MainController{
     @FXML
     public void handleAll(ActionEvent event){
         if (event.getSource().equals(allcoursebt)){
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Allcourse.fxml")) ;
-            try {
-                stage.setScene(new Scene(loader.load(),840,540));
-                stage.setTitle("All Course Schedule");
-                stage.setResizable(false);
-                AllCourseController controller = (AllCourseController) loader.getController();
-                stage.show();
-            } catch (IOException e1){
-                e1.printStackTrace();
-            }
+            openAllCourse();
+        }
+    }
+
+    @FXML
+    public static void openAllCourse(){
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/View/Allcourse.fxml")) ;
+        try {
+            stage.setScene(new Scene(loader.load(),840,540));
+            stage.setTitle("All Course Schedule");
+            stage.setResizable(false);
+            AllCourseController controller = (AllCourseController) loader.getController();
+            stage.show();
+        } catch (IOException e1){
+            e1.printStackTrace();
         }
     }
 

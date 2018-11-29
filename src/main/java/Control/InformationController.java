@@ -5,7 +5,6 @@ import Database.DBControl;
 import Model.AllCourse;
 import Model.Student;
 import Model.Subject;
-import com.sun.tools.javac.util.ArrayUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +21,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -77,7 +80,9 @@ public class InformationController {
     protected TableColumn<Subject, String> ChooseYear;
 
     @FXML
-    protected Button addbt,viewAllCourse,canclebt,dropbt;
+    public Button addbt,viewAllCourse,dropbt;
+    @FXML
+    protected Button cancleBtn;
 
     @FXML
     protected Label fname,lname,Year,tcredit,preTcredit,bsubject,csubject;
@@ -115,14 +120,14 @@ public class InformationController {
     public void showImage() {
         try {
             if (presentStudent.getPath() == null){
-                image.setImage(new Image("Person/default.png"));
+                image.setImage(new Image("Person/default2.png"));
             }else {
                 image.setImage(new Image("Person/"+presentStudent.getPath()));
             }
         }catch (IllegalArgumentException exception){
             System.out.println(presentStudent.getPath());
             System.out.println("Not found picture.");
-            image.setImage(new Image("Person/default.png"));
+            image.setImage(new Image("Person/default2.png"));
         }
     }
 
@@ -139,8 +144,8 @@ public class InformationController {
                         setText(null);
                         setStyle("");
                     } else { //If the cell is not empty\
-                        setText(item); //Put the String data in the cell , set to null
-                        //We get here all the info of the Subject of this row
+                        setText(item); //Put the String data in the cell
+
                         Subject auxPerson = getTableView().getItems().get(getIndex());
                         if (auxPerson.getHardness().equals("3")) {
                             setText("Hard");
@@ -172,7 +177,7 @@ public class InformationController {
             String[] subjectforStudent = presentStudent.getRegistersubject().split("#");
             ArrayList<Subject> checkNotpass = allSubjects; // to check duplicate subject in passed subject.
             dataNotPassSubject.addAll(checkNotpass); // to show in not pass table.
-            if (subjectforStudent[0].equals("")&& subjectforStudent.length == 1){ // not wasting time to for loop if array is no data
+            if (subjectforStudent[0].equals("")&& subjectforStudent.length == 1){ // not wasting time to for loop if array is not contain any data.
                 //System will throw new NullPointerException() Or IndexOutOfBoundsException;
             }else {
                 for (Subject subjectcheck : checkNotpass) {
@@ -188,7 +193,7 @@ public class InformationController {
             }
             showStudentPassSubject();
         }catch (NullPointerException | IndexOutOfBoundsException e){
-            dataNotPassSubject.addAll(allSubjects);
+            dataNotPassSubject.addAll(allSubjects);// handle exception when system throws
             showStudentPassSubject();
         }
     }
@@ -209,6 +214,7 @@ public class InformationController {
         notHard.setCellValueFactory(cellData->cellData.getValue().hardnessProperty());
         notView.setItems(dataNotPassSubject);
         notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        notView.refresh();
         notView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -256,16 +262,43 @@ public class InformationController {
         ChooseCredit.setCellValueFactory(cellData->cellData.getValue().creDitProperty());
         ChooseYear.setCellValueFactory(cellData->cellData.getValue().yearProperty());
         ChooseTable.setItems(dataChooseSubject);
+        ChooseTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                cancleBtn.setDisable(false);
+            }
+        });
     }
 
     @FXML
     public void viewAllBThandle(ActionEvent event){
         if (event.getSource().equals(viewAllCourse)){
+            MainController.openAllCourse();
         }
     }
 
     @FXML
-    public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้ , มีปุ่ม ลบวิชาออกจาก Pass list ด้วย
+    public void handleCanclebt(ActionEvent event){
+        Subject subject = ChooseTable.getSelectionModel().getSelectedItem();
+        if (event.getSource().equals(cancleBtn)){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to remove this subject from Pre-Register table?.",ButtonType.YES,ButtonType.NO);
+            alert.setHeaderText("");
+            Optional optional = alert.showAndWait();
+            if (optional.get().equals(ButtonType.YES)){
+                dataChooseSubject.remove(subject);
+                dataNotPassSubject.add(subject);
+                cancleBtn.setDisable(true);
+            }
+        }
+    }
+
+    @FXML
+    public void handleDropbtn(ActionEvent event){ // มีปุ่ม ลบวิชาออกจาก Pass list ด้วย
+
+    }
+
+    @FXML
+    public void handleAddPass(ActionEvent event){ // เหลือแก้ให้ น้องลงวิชาพี่ไม่ได้
         if (event.getSource().equals(addbt)){
             Alert newAlert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all the subject to your passed subject table?",
                     ButtonType.YES,ButtonType.NO);
@@ -279,9 +312,10 @@ public class InformationController {
                     for (Subject subjectnew : dataSubject) {
                         newSubject += subjectnew.getSubCode()+"#";
                     }
-                    presentStudent.setRegistersubject(newSubject);
-                    open.updateStudentSubject(presentStudent);
                     totalCredit += Integer.parseInt(subject.getCreDit());
+                    presentStudent.setRegistersubject(newSubject);
+                    presentStudent.setCredit(String.valueOf(totalCredit));
+                    open.updateStudentSubject(presentStudent);
                     tcredit.setText(String.valueOf(totalCredit));
                     System.out.println("Complete");
                 }

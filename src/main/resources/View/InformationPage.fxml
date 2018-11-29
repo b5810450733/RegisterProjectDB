@@ -38,7 +38,7 @@
                   <Label fx:id="Year" layoutX="231.0" layoutY="531.0" prefHeight="17.0" prefWidth="118.0" text="Year" />
                   <Label fx:id="tcredit" layoutX="230.0" layoutY="496.0" text="Totol Credit" />
                   <Line endX="393.0000305175781" layoutX="103.0" layoutY="378.0" startX="-107.00001525878906" stroke="#8f854762" strokeWidth="2.2" />
-                  <Button fx:id="dropbt" layoutX="439.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: &quot;#FF5353&quot;;" text="Drop" />
+                  <Button fx:id="dropbt" disable="true" layoutX="439.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: &quot;#FF5353&quot;;" text="Drop" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -67,15 +67,15 @@
                         <TableColumn fx:id="ChooseYear" prefWidth="61.0" text="Year" />
                     </columns>
                   </TableView>
-                  <Button fx:id="addbt" disable="true" layoutX="226.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #03F3AB;" text="Add to Pass">
+                  <Button fx:id="addbt" disable="true" layoutX="226.0" layoutY="597.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: #03F3AB;" text="Add to Pass List">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font></Button>
                   <Button fx:id="viewAllCourse" layoutX="96.0" layoutY="597.0" mnemonicParsing="false" onAction="#viewAllBThandle" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: &quot;#62A9FF&quot;;" text="View All Course" />
-                  <Button fx:id="canclebt" layoutX="7.0" layoutY="597.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="71.0" style="-fx-background-color: &quot;#FF5353&quot;;" text="Cancle" />
-                  <Label fx:id="preTcredit" alignment="CENTER" layoutX="396.0" layoutY="597.0" prefHeight="36.0" prefWidth="92.0" style="-fx-border-color: &quot;#62A9FF&quot;; -fx-border-width: 1.5;" text="Totol Credit" />
+                  <Label fx:id="preTcredit" alignment="CENTER" layoutX="389.0" layoutY="597.0" prefHeight="36.0" prefWidth="99.0" style="-fx-border-color: &quot;#62A9FF&quot;; -fx-border-width: 1.5;" text="Totol Credit" />
                   <Label fx:id="bsubject" layoutX="7.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Base: subject" />
                   <Label fx:id="csubject" layoutX="258.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Continue: subject" />
+                  <Button fx:id="cancleBtn" disable="true" layoutX="9.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleCanclebt" prefHeight="36.0" prefWidth="73.0" style="-fx-background-color: #FF5353;" text="Cancle" />
                </children>
             </AnchorPane>
         </items>
