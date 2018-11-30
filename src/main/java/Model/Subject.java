@@ -82,12 +82,6 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" +
-                "subCode='" + subCode + '\'' +
-                ", subName='" + subName + '\'' +
-                ", creDit=" + creDit +
-                ", hardness=" + hardness +
-                ", year='" + year + '\'' +
-                '}';
+        return getSubCode()+" | "+getSubName()+" | Credit : "+getCreDit()+" | Year : "+getYear();
     }
 }

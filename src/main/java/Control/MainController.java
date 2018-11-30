@@ -133,6 +133,7 @@ public class MainController{
             stage2.setTitle("Your Information");
             stage2.setResizable(false);
             CourseController controller = (CourseController) loader2.getController();
+            controller.setNowLogin(login);
             stage2.show();
         } catch (IOException e2){
             e2.printStackTrace();
