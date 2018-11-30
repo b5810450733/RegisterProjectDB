@@ -10,13 +10,13 @@
    <children>
       <TableView layoutY="33.0" prefHeight="370.0" prefWidth="600.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="126.0" text="Name" />
-            <TableColumn prefWidth="49.0" text="Credit" />
-            <TableColumn prefWidth="50.0" text="Year" />
-            <TableColumn prefWidth="115.0" text="BaseSubject" />
-            <TableColumn prefWidth="113.0" text="ContinueSubject" />
-            <TableColumn prefWidth="71.0" text="Difficulty" />
+          <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="name" prefWidth="126.0" text="Name" />
+            <TableColumn fx:id="credit" prefWidth="49.0" text="Credit" />
+            <TableColumn fx:id="year" prefWidth="50.0" text="Year" />
+            <TableColumn fx:id="base" prefWidth="115.0" text="BaseSubject" />
+            <TableColumn fx:id="contsub" prefWidth="113.0" text="ContinueSubject" />
+            <TableColumn fx:id="diff" prefWidth="71.0" text="Difficulty" />
         </columns>
       </TableView>
       <Label alignment="CENTER" prefHeight="34.0" prefWidth="599.0" text="All Course for Computer Science">
