@@ -25,5 +25,9 @@ public class AllCourseController {
     @FXML
     private TableColumn<?, ?> diff;
 
+    public void start(){
+        
+    }
+
 
 }
