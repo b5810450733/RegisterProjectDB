@@ -74,6 +74,8 @@ public class DBControl {
                 inFlow = new Subject(resultSet.getString(1)
                         , resultSet.getString(2)
                         , resultSet.getString(3),resultSet.getString(4),resultSet.getString(5));
+                inFlow.setBaseSubject(resultSet.getString(6));
+                inFlow.setContSubject(resultSet.getString(7));
                 subjectsList.add(inFlow);
             }
         } catch (SQLException e) {

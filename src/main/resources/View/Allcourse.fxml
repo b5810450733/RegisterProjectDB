@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.AllCourseController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.AllCourseController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="243.0" layoutY="80.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Images/pastel3.jpg" />
-         </image>
-      </ImageView>
+      <TableView layoutY="33.0" prefHeight="370.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="126.0" text="Name" />
+            <TableColumn prefWidth="49.0" text="Credit" />
+            <TableColumn prefWidth="50.0" text="Year" />
+            <TableColumn prefWidth="115.0" text="BaseSubject" />
+            <TableColumn prefWidth="113.0" text="ContinueSubject" />
+            <TableColumn prefWidth="71.0" text="Difficulty" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" prefHeight="34.0" prefWidth="599.0" text="All Course for Computer Science">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

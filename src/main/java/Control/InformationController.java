@@ -115,6 +115,17 @@ public class InformationController {
     }
 
     @FXML
+    public void setBaseAndContSubject(Subject subject){
+        String bShow = "";
+        String cShow = "";
+        String[] show = allCourse.findSubject(subject);
+        bShow = show[0];
+        cShow = show[1];
+        bsubject.setText(bShow);
+        csubject.setText(cShow);
+    }
+
+    @FXML
     public void showImage() {
         try {
             if (presentStudent.getPath() == null){
@@ -129,7 +140,6 @@ public class InformationController {
         }
     }
 
-    // made by 5810450733
     @FXML
     public void updateColor(){
         notHard.setCellFactory(column -> {
@@ -137,7 +147,6 @@ public class InformationController {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty); //This is mandatory
-
                     if (item == null || empty) { //If the cell is empty
                         setText(null);
                         setStyle("");
@@ -159,11 +168,21 @@ public class InformationController {
                                 setTextFill(Color.WHITE);
                             } else
                                 setTextFill(Color.BLACK);
-                        }
-                    }
-                }
-            };
+                        } } }};
         });
+        PassSubStatus.setCellFactory(column -> {
+            return new TableCell<Subject, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item);
+                        setStyle("-fx-background-color: rgba(0,202,24,0.60)");
+                    } }}; });
     }
 
 
@@ -220,26 +239,39 @@ public class InformationController {
         notView.setItems(dataNotPassSubject);
         notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-
-
         notView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Subject clicked1 = notView.getSelectionModel().getSelectedItem();
                 if (event.getClickCount() == 1 ){
-                    bsubject.setText(clicked1.getSubName());
-                    csubject.setText(clicked1.getCreDit());
+                    setBaseAndContSubject(clicked1);
                 }else if (event.getClickCount() == 2){
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add this subject to Pre-Register table?",ButtonType.YES,ButtonType.NO);
-                    alert.setHeaderText("");
-                    Optional optional = alert.showAndWait();
-                    if (optional.get().equals(ButtonType.YES)){
-                        dataChooseSubject.add(clicked1);
-                        dataNotPassSubject.remove(clicked1);
-                        updateTotolPreCredit();
-                        addbt.setDisable(false);
-                    }else {
-                        return;
+                    if (Double.parseDouble(presentStudent.getYear()) < (Double.parseDouble(clicked1.getYear()))){
+                        Alert alert = new Alert(Alert.AlertType.WARNING,"This course is not available because your year is not reached.",ButtonType.OK);
+                        alert.setHeaderText("");
+                        alert.show();
+
+                    }else{
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add this subject to Pre-Register table?",ButtonType.YES,ButtonType.NO);
+                        alert.setHeaderText("");
+                        Optional optional = alert.showAndWait();
+
+                        Boolean canChoose = checkcanRegis(clicked1);
+
+                        if (optional.get().equals(ButtonType.YES) && canChoose == true){
+                            dataChooseSubject.add(clicked1);
+                            dataNotPassSubject.remove(clicked1);
+                            updateTotolPreCredit();
+                            addbt.setDisable(false);
+                        }else if (optional.get().equals(ButtonType.NO)){
+                            return;
+                        }
+                        else {
+                            String nameSubject = "\""+ clicked1.getBaseSubject() +" "+allCourse.findBaseName(clicked1)+"\"";
+                            alert = new Alert(Alert.AlertType.WARNING,"You have to Pass "+nameSubject+" Before register "+clicked1.getSubName()+".",ButtonType.OK);
+                            alert.setHeaderText("");
+                            alert.show();
+                        }
                     }
                 }
             }
@@ -359,7 +391,26 @@ public class InformationController {
         preTcredit.setText(String.valueOf(pre));
     }
 
-
+    public boolean checkcanRegis(Subject subject){
+        Boolean can = false;
+        for (Subject pre : dataChooseSubject) {
+            if (pre.getSubCode().equals(subject.getBaseSubject())){
+                can = false;
+            }
+        }
+        if (dataSubject.size()==0 && can == true){
+            return true;
+        }
+        if (subject.getBaseSubject() == null){
+            return true;
+        }
+        for (Subject passed : dataSubject) {
+            if (passed.getSubCode().equals(subject.getBaseSubject())){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

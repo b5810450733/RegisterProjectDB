@@ -1,5 +1,10 @@
 package Model;
 
+import Database.DBConnect;
+import Database.DBControl;
+
+import java.util.ArrayList;
+
 public class AllCourse {
     public String[] year11 = new String[] {"01417111","01418112","01418114","01418131","01999111"};
     public String[] year12 = new String[] {"01417112","01418113","01418132"};
@@ -9,6 +14,40 @@ public class AllCourse {
     public String[] year32 = new String[] {"01418332","01418333","01418334","01418351","01418390"};
     public String[] year41 = new String[] {"01418490"};
     public String[] year42 = new String[] {"01418499"};
+
+    public String[] findSubject(Subject subject){
+        String[] name = new String[2] ;
+        DBControl dbControl = DBConnect.openDB();
+        ArrayList<Subject> subjectList = dbControl.readSubject();
+        for (Subject read : subjectList) {
+            if (read.getSubCode().equals(subject.getBaseSubject())){
+                name[0] = read.getSubName();
+            }
+            if (read.getSubCode().equals(subject.getContSubject())){
+                name[1] = read.getSubName();
+            }
+        }
+        if (name[0] == null){
+            name[0] = "No Base Subject";
+        }
+        if (name[1] == null){
+            name[1] = "No Continue Subject";
+        }
+        return name;
+    }
+
+    public String findBaseName(Subject subject){
+        String name = "";
+        DBControl dbControl = DBConnect.openDB();
+        ArrayList<Subject> subjectList = dbControl.readSubject();
+        for (Subject read : subjectList) {
+            if (read.getSubCode().equals(subject.getBaseSubject())){
+                name = read.getSubName();
+                break;
+            }
+        }
+        return name;
+    }
 
     public String[] getYear11() {
         return year11;

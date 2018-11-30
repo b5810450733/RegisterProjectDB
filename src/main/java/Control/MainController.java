@@ -130,7 +130,7 @@ public class MainController{
             stage2.setX(1041);
             stage2.setY(70);
             stage2.setScene(new Scene(loader2.load(),370,360));
-            stage2.setTitle("Your Information");
+            stage2.setTitle("Should Register in this term");
             stage2.setResizable(false);
             CourseController controller = (CourseController) loader2.getController();
             controller.setNowLogin(login);

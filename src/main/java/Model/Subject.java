@@ -8,6 +8,8 @@ public class Subject {
     private SimpleStringProperty creDit;
     private SimpleStringProperty hardness;
     private SimpleStringProperty year;
+    private SimpleStringProperty baseSubject;
+    private SimpleStringProperty ContSubject;
 
     public Subject(){
     }
@@ -22,6 +24,30 @@ public class Subject {
 
     public String getSubCode() {
         return subCode.get();
+    }
+
+    public String getBaseSubject() {
+        return baseSubject.get();
+    }
+
+    public SimpleStringProperty baseSubjectProperty() {
+        return baseSubject;
+    }
+
+    public void setBaseSubject(String baseSubject) {
+        this.baseSubject = new SimpleStringProperty(baseSubject);
+    }
+
+    public String getContSubject() {
+        return ContSubject.get();
+    }
+
+    public SimpleStringProperty contSubjectProperty() {
+        return ContSubject;
+    }
+
+    public void setContSubject(String contSubject) {
+        this.ContSubject = new SimpleStringProperty(contSubject);
     }
 
     public SimpleStringProperty subCodeProperty() {
