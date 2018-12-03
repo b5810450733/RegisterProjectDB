@@ -6,6 +6,7 @@ import Model.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.sql.Connection;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class RegisterController {
 
     @FXML
     private Button submitbt;
+
 
     protected Stage stage;
 

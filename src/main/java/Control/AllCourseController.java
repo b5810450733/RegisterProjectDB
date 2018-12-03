@@ -26,7 +26,7 @@ public class AllCourseController {
     private TableColumn<?, ?> diff;
 
     public void start(){
-        
+
     }
 
 

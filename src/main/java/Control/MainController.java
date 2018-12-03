@@ -2,22 +2,21 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
+import Launcher.Main;
 import Model.Student;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 public class MainController{
@@ -31,13 +30,51 @@ public class MainController{
     private Button regisbt;
 
     @FXML
-    private Button allcoursebt;
+    protected Button allcoursebt,exitbtn;
 
 
     @FXML
     private AnchorPane mainPane;
+    private static double xOffset = 0;
+    private static double yOffset = 0;
 
     protected Student login;
+
+
+    public void initialize(){
+        makeStageDrageable(mainPane);
+        exitbtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage) exitbtn.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+
+    public static void makeStageDrageable(AnchorPane pane) {
+        pane.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Main.stage.setX(event.getScreenX() - xOffset);
+                Main.stage.setY(event.getScreenY() - yOffset);
+                Main.stage.setOpacity(0.7f);
+            }
+        });
+        pane.setOnDragDone((e) -> {
+            Main.stage.setOpacity(1.0f);
+        });
+        pane.setOnMouseReleased((e) -> {
+            Main.stage.setOpacity(1.0f);
+        });
+    }
 
 
     @FXML

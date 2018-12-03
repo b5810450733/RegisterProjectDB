@@ -8,42 +8,71 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MainController">
+<AnchorPane fx:id="mainPane" prefHeight="475.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.MainController">
    <children>
-      <ImageView disable="true" fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Images/pastel2.jpg" />
-         </image>
-      </ImageView>
-      <Button fx:id="loginbt" defaultButton="true" layoutX="376.0" layoutY="289.0" mnemonicParsing="false" onAction="#handlelogin" prefHeight="62.0" prefWidth="147.0" style="-fx-cursor: Hand;" text="Login">
+      <Label layoutY="79.0" prefHeight="399.0" prefWidth="666.0" style="-fx-background-color: #2d2f31;" />
+      <Button fx:id="loginbt" defaultButton="true" layoutX="413.0" layoutY="255.0" mnemonicParsing="false" onAction="#handlelogin" prefHeight="25.0" prefWidth="74.0" style="-fx-cursor: Hand; -fx-background-color: #22a86c; -fx-background-radius: 0 0 0 0;" text="Login" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="57.0" prefHeight="86.0" prefWidth="544.0" style="-fx-border-color: #FACC2E#FACC2E; -fx-border-width: 2;" text="Welcome to Register Program" textAlignment="CENTER" textFill="#e01b77">
+      <TextField fx:id="idlogin" layoutX="214.0" layoutY="216.0" prefHeight="32.0" prefWidth="273.0" promptText=" Enter your Student ID..." style="-fx-background-radius: 0 0 0 0; -fx-background-color: #505050; -fx-text-inner-color: #FFFFFF;">
          <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <TextField fx:id="idlogin" layoutX="152.0" layoutY="188.0" prefHeight="45.0" prefWidth="408.0" promptText="Enter your Student ID...">
-         <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="regisbt" layoutX="199.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="62.0" prefWidth="147.0" style="-fx-cursor: Hand;" text="Register">
+      <Button fx:id="regisbt" layoutX="295.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="31.0" prefWidth="111.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Register" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Italic" size="13.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="147.0" layoutY="238.0" prefHeight="17.0" prefWidth="257.0" text="*If you have never registered, register first." textFill="#ff2121">
+      <Label alignment="CENTER" layoutX="213.0" layoutY="250.0" prefHeight="17.0" prefWidth="173.0" text="*Cannot login?, register first." textFill="#df504c">
          <font>
             <Font size="12.0" />
          </font>
       </Label>
-      <Button fx:id="allcoursebt" layoutX="222.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="45.0" prefWidth="268.0" style="-fx-cursor: Hand;" text="Schedule of all courses">
+      <Button fx:id="allcoursebt" layoutX="249.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="31.0" prefWidth="199.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Schedule of Com-Sci" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font size="14.0" />
          </font>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="86.0" prefWidth="666.0" style="-fx-background-color: #22a86c;" text="Welcome   to   Register   Program" textFill="WHITE">
+         <font>
+            <Font name="Waseem Regular" size="33.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="67.0" fitWidth="49.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="260.0" layoutY="311.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
+      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="268.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/id-card.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="179.0" layoutY="216.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
+      <ImageView fitHeight="17.0" fitWidth="18.0" layoutX="188.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/avatar.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="215.0" layoutY="371.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
+      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="223.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/schedule.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="58.0" layoutX="304.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/unlock.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitbtn" layoutY="2.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="25.0" style="-fx-background-color: #22a86c;">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/error.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

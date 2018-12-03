@@ -90,7 +90,6 @@ public class InformationController {
     @FXML
     protected ImageView image;
 
-
     private AllCourse allCourse = new AllCourse();
     protected Student presentStudent;
     private  ArrayList<Subject> allSubjects = new ArrayList<>();
