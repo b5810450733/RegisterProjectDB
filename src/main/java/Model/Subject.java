@@ -10,6 +10,7 @@ public class Subject {
     private SimpleStringProperty year;
     private SimpleStringProperty baseSubject;
     private SimpleStringProperty ContSubject;
+    private SimpleStringProperty isPass;
 
     public Subject(){
     }
@@ -104,6 +105,18 @@ public class Subject {
 
     public void setYear(String year) {
         this.year.set(year);
+    }
+
+    public String getIsPass() {
+        return isPass.get();
+    }
+
+    public SimpleStringProperty isPassProperty() {
+        return isPass;
+    }
+
+    public void setIsPass(String isPass) {
+        this.isPass = new SimpleStringProperty(isPass);
     }
 
     @Override

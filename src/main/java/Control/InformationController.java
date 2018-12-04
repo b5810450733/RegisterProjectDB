@@ -100,7 +100,7 @@ public class InformationController {
 
     @FXML
     public void initialize(){
-        updateColor();
+        updateColor(notHard);
     }
 
     @FXML
@@ -140,8 +140,8 @@ public class InformationController {
     }
 
     @FXML
-    public void updateColor(){
-        notHard.setCellFactory(column -> {
+    public void updateColor(TableColumn nowColumn){
+        nowColumn.setCellFactory(column -> {
             return new TableCell<Subject, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -154,13 +154,13 @@ public class InformationController {
                         Subject auxPerson = getTableView().getItems().get(getIndex());
                         if (auxPerson.getHardness().equals("3")) {
                             setText("Hard");
-                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(223,0,11,0.60)");
+                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(223,0,11,0.45)");
                         }else if (auxPerson.getHardness().equals("2")) {
                             setText("Medium");
-                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(15,86,223,0.65)");
+                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(15,86,223,0.45)");
                         }else if (auxPerson.getHardness().equals("1")) {
                             setText("Easy");
-                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(0,202,24,0.65)");
+                            setStyle("-fx-font-weight: bold;" + "-fx-background-color: rgba(0,202,24,0.45)");
                         }else{
                             setStyle("-fx-background-color: white");
                             if (getTableView().getSelectionModel().getSelectedItems().contains(auxPerson)) {
@@ -180,7 +180,7 @@ public class InformationController {
                         setStyle("");
                     } else {
                         setText(item);
-                        setStyle("-fx-background-color: rgba(0,202,24,0.60)");
+                        setStyle("-fx-background-color: rgba(0,202,24,0.53)");
                     } }}; });
     }
 
@@ -200,6 +200,7 @@ public class InformationController {
                     for (String subject : subjectforStudent) {
                         if (subjectcheck.getSubCode().equals(subject)) { // if duplicated
                             //System.out.println(shownotPass.getSubCode()); for debug
+                            subjectcheck.setIsPass("Passed");
                             dataSubject.add(subjectcheck); // add to passed table
                             totalCredit += Integer.parseInt(subjectcheck.getCreDit()); // calculate total credit
                             dataNotPassSubject.remove(subjectcheck); // delete duplicate subject
@@ -236,7 +237,7 @@ public class InformationController {
         notSubyear.setCellValueFactory(cellData->cellData.getValue().yearProperty());
         notHard.setCellValueFactory(cellData->cellData.getValue().hardnessProperty());
         notView.setItems(dataNotPassSubject);
-        notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         notView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -275,25 +276,25 @@ public class InformationController {
                 }
             }
         });
-        notView.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.ENTER){
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all selected to Pre-Register table?",ButtonType.YES,ButtonType.NO);
-                    alert.setHeaderText("");
-                    Optional optional = alert.showAndWait();
-                    if (optional.get().equals(ButtonType.YES)) {
-                        ObservableList<Subject> subjectObservableList = notView.getSelectionModel().getSelectedItems();
-                        dataChooseSubject.addAll(subjectObservableList);
-                        dataNotPassSubject.removeAll(subjectObservableList);
-                        updateTotolPreCredit();
-                        addbt.setDisable(false);
-                    }else {
-                        return;
-                    }
-                }
-            }
-        });
+//        notView.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if (event.getCode() == KeyCode.ENTER){
+//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all selected to Pre-Register table?",ButtonType.YES,ButtonType.NO);
+//                    alert.setHeaderText("");
+//                    Optional optional = alert.showAndWait();
+//                    if (optional.get().equals(ButtonType.YES)) {
+//                        ObservableList<Subject> subjectObservableList = notView.getSelectionModel().getSelectedItems();
+//                        dataChooseSubject.addAll(subjectObservableList);
+//                        dataNotPassSubject.removeAll(subjectObservableList);
+//                        updateTotolPreCredit();
+//                        addbt.setDisable(false);
+//                    }else {
+//                        return;
+//                    }
+//                }
+//            }
+//        });
         //////////////////////////////////////////////////////////////////////////////////////////
         ChooseID.setCellValueFactory(cellData->cellData.getValue().subCodeProperty());
         ChooseName.setCellValueFactory(cellData->cellData.getValue().subNameProperty());
@@ -313,8 +314,12 @@ public class InformationController {
     @FXML
     public void viewAllBThandle(ActionEvent event){
         if (event.getSource().equals(viewAllCourse)){
-            MainController.openAllCourse();
+            MainController.openAllCourse(presentStudent,getDataSubject());
         }
+    }
+
+    public ObservableList<Subject> getDataSubject() {
+        return dataSubject;
     }
 
     @FXML
@@ -345,6 +350,7 @@ public class InformationController {
             if (optional.get().equals(ButtonType.YES)){
                 dataSubject.remove(subject);
                 dataNotPassSubject.add(subject);
+                CourseController.updateList(subject,0);
                 updateRegister();
                 dropbt.setDisable(true);
             }
@@ -358,6 +364,7 @@ public class InformationController {
         for (Subject subjectnew : dataSubject) {
             newSubject += subjectnew.getSubCode()+"#";
             toSetCredit += Integer.parseInt(subjectnew.getCreDit());
+            subjectnew.setIsPass("Passed");
         }
         presentStudent.setRegistersubject(newSubject);
         presentStudent.setCredit(String.valueOf(toSetCredit));
@@ -375,7 +382,9 @@ public class InformationController {
             Optional optional = newAlert.showAndWait();
             for (Subject subject : dataChooseSubject) {
                 if (!dataSubject.contains(subject) && optional.get().equals(ButtonType.YES) && !dataChooseSubject.isEmpty()){
+                    subject.setIsPass("Passed");
                     dataSubject.add(subject);
+                    CourseController.updateList(subject,1);
                     updateRegister();
                 }
             }

@@ -25,6 +25,7 @@ public class DBControl {
             prepare.setString(2, newStudent.getFirstName());
             prepare.setString(3, newStudent.getLastName());
             prepare.setString(4, newStudent.getYear());
+            prepare.setString(6,newStudent.getRegistersubject());
 
             if (prepare.executeUpdate() == 1) {
                 addResult = true;

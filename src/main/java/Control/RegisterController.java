@@ -52,7 +52,9 @@ public class RegisterController {
             if (optional.get().equals(ButtonType.YES)) {
                 if (id.length() == 10){
                     DBControl dbControl = DBConnect.openDB();
-                    System.out.println(dbControl.addStudent(new Student(id,firstName,lastName,year)));
+                    Student newStudent = new Student(id,firstName,lastName,year);
+                    newStudent.setRegistersubject("");
+                    System.out.println(dbControl.addStudent(newStudent));
                     idfield.setStyle("-fx-border-color: green");
                     System.out.println("Complete");
                     stage.close();

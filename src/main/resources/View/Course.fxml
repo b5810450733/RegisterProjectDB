@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="360.0" prefWidth="370.0" style="-fx-background-color: #2d2f31;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.CourseController">
    <children>
-      <ListView fx:id="list" layoutY="43.0" prefHeight="317.0" prefWidth="370.0" style="-fx-border-color: #2d2f31; -fx-text-inner-color: #FFFFFF; -fx-control-inner-background: #2d2f31;" />
+      <ListView fx:id="list" layoutY="43.0" prefHeight="317.0" prefWidth="370.0" style="-fx-border-color: #2d2f31;" />
       <Label alignment="CENTER" prefHeight="44.0" prefWidth="370.0" style="-fx-background-color: #22a86c;" text="Should   Register   in   this   Semester" textFill="WHITE">
          <font>
             <Font name="Waseem Regular" size="18.0" />

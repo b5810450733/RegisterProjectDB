@@ -4,11 +4,10 @@ import Database.DBConnect;
 import Database.DBControl;
 import Launcher.Main;
 import Model.Student;
-import animatefx.animation.BounceIn;
-import animatefx.animation.FadeIn;
-import animatefx.animation.Pulse;
-import animatefx.animation.Shake;
+import Model.Subject;
+import animatefx.animation.*;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -44,8 +43,8 @@ public class MainController{
 
     @FXML
     private AnchorPane mainPane;
-    private static double xOffset = 0;
-    private static double yOffset = 0;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     protected Student login;
 
@@ -63,7 +62,7 @@ public class MainController{
         });
     }
 
-    public static void makeStageDrageable(AnchorPane pane) {
+    private void makeStageDrageable(AnchorPane pane) {
         pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -153,20 +152,27 @@ public class MainController{
     @FXML
     public void handleAll(ActionEvent event){
         if (event.getSource().equals(allcoursebt)){
-            openAllCourse();
+            openAllCourse(null,null);
         }
     }
 
     @FXML
-    public static void openAllCourse(){
+    public static void openAllCourse(Student student, ObservableList<Subject> pass ){
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/View/Allcourse.fxml")) ;
         try {
-            stage.setScene(new Scene(loader.load(),732,483));
+            stage.setScene(new Scene(loader.load(),1116,484));
             stage.setTitle("All Course Schedule");
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.initStyle(StageStyle.UNDECORATED);
             AllCourseController controller = (AllCourseController) loader.getController();
+            if (student != null){
+                //controller.setInfoComtrol(infocontroller);
+                controller.setLoginStudent(student);
+                controller.setPassedSubject(pass);
+                System.out.println(student);
+            }
+            controller.setThisStage(stage);
             stage.show();
             new FadeIn(stage.getScene().getRoot()).play();
         } catch (IOException e1){
@@ -188,6 +194,7 @@ public class MainController{
             stage2.initStyle(StageStyle.UNDECORATED);
             controller.setNowLogin(login);
             stage2.show();
+            new FadeInLeft(stage2.getScene().getRoot()).play();
         } catch (IOException e2){
             e2.printStackTrace();
         }
