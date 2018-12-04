@@ -303,7 +303,9 @@ public class InformationController {
         ChooseTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                cancleBtn.setDisable(false);
+                if (dataChooseSubject.size() >=1){
+                    cancleBtn.setDisable(false);
+                }
             }
         });
     }
@@ -326,6 +328,9 @@ public class InformationController {
                 dataChooseSubject.remove(subject);
                 dataNotPassSubject.add(subject);
                 cancleBtn.setDisable(true);
+                if (dataChooseSubject.size()==0){
+                    addbt.setDisable(true);
+                }
             }
         }
     }
@@ -369,7 +374,7 @@ public class InformationController {
             newAlert.setHeaderText("");
             Optional optional = newAlert.showAndWait();
             for (Subject subject : dataChooseSubject) {
-                if (!dataSubject.contains(subject) && optional.get().equals(ButtonType.YES)){
+                if (!dataSubject.contains(subject) && optional.get().equals(ButtonType.YES) && !dataChooseSubject.isEmpty()){
                     dataSubject.add(subject);
                     updateRegister();
                 }

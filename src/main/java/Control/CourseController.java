@@ -30,14 +30,23 @@ public class CourseController {
         ArrayList<Subject> checkPass = new ArrayList<>();
         double Useryear = Double.parseDouble(nowLogin.getYear());
         checkPass.addAll(allSubject);
-        String[] userRegister = nowLogin.getRegistersubject().split("#");
+        String[] userRegister ;
+        if (nowLogin.getRegistersubject().length() > 0){
+            userRegister = nowLogin.getRegistersubject().split("#");
+        }
+        else {
+            userRegister = null;
+        }
         try {
-            for (Subject subject : allSubject) {
-                for (String userRegis : userRegister) {
-                    if (subject.getSubCode().equals(userRegis)){
-                        checkPass.remove(subject);
+            if ((userRegister != null ? userRegister.length : 0) > 0){
+                for (Subject subject : allSubject) {
+                    for (String userRegis : userRegister) {
+                        if (subject.getSubCode().equals(userRegis)){
+                            checkPass.remove(subject);
+                        }
                     }
                 }
+
             }
             for (Subject can : checkPass) {
                 if (Double.parseDouble(can.getYear()) <= Useryear){
@@ -46,7 +55,7 @@ public class CourseController {
                 }
             }
         }catch (NullPointerException | IndexOutOfBoundsException e){
-            e.getStackTrace();
+            System.out.println("NUll Pointer");
         }
 
     }

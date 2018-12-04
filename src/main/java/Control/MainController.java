@@ -4,6 +4,11 @@ import Database.DBConnect;
 import Database.DBControl;
 import Launcher.Main;
 import Model.Student;
+import animatefx.animation.BounceIn;
+import animatefx.animation.FadeIn;
+import animatefx.animation.Pulse;
+import animatefx.animation.Shake;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +36,10 @@ public class MainController{
     private Button regisbt;
 
     @FXML
-    protected Button allcoursebt,exitbtn;
+    protected Button allcoursebt;
+
+    @FXML
+    protected Button exitbtn;
 
 
     @FXML
@@ -39,6 +48,8 @@ public class MainController{
     private static double yOffset = 0;
 
     protected Student login;
+
+
 
 
     public void initialize(){
@@ -127,12 +138,14 @@ public class MainController{
                     e1.printStackTrace();
                 }
             }else {
+                new Shake(idlogin.getScene().getRoot()).play();
                 Alert newAlert = new Alert(Alert.AlertType.WARNING);
                 idlogin.setStyle("-fx-border-color: red");
                 newAlert.setTitle("Warning, Please check the Information.");
                 newAlert.setContentText("This ID not exist, Please check your ID or Register if you never registered.");
                 newAlert.setHeaderText("");
                 newAlert.showAndWait();
+                idlogin.clear();
             }
         }
     }
@@ -149,11 +162,13 @@ public class MainController{
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/View/Allcourse.fxml")) ;
         try {
-            stage.setScene(new Scene(loader.load(),840,540));
+            stage.setScene(new Scene(loader.load(),732,483));
             stage.setTitle("All Course Schedule");
             stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
             AllCourseController controller = (AllCourseController) loader.getController();
             stage.show();
+            new FadeIn(stage.getScene().getRoot()).play();
         } catch (IOException e1){
             e1.printStackTrace();
         }
@@ -170,6 +185,7 @@ public class MainController{
             stage2.setTitle("Should Register in this term");
             stage2.setResizable(false);
             CourseController controller = (CourseController) loader2.getController();
+            stage2.initStyle(StageStyle.UNDECORATED);
             controller.setNowLogin(login);
             stage2.show();
         } catch (IOException e2){

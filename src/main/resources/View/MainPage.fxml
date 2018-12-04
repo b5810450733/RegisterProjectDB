@@ -21,7 +21,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="regisbt" layoutX="295.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="31.0" prefWidth="111.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Register" textFill="WHITE">
+      <Button fx:id="regisbt" layoutX="245.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="31.0" prefWidth="199.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Italic" size="13.0" />
          </font>
@@ -31,7 +31,7 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <Button fx:id="allcoursebt" layoutX="249.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="31.0" prefWidth="199.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Schedule of Com-Sci" textFill="WHITE">
+      <Button fx:id="allcoursebt" layoutX="244.0" layoutY="372.0" mnemonicParsing="false" onAction="#handleAll" prefHeight="31.0" prefWidth="199.0" style="-fx-cursor: Hand; -fx-background-color: #505050; -fx-background-radius: 0 0 0 0;" text="Schedule of Com-Sci" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -42,8 +42,8 @@
          </font>
       </Label>
       <ImageView fitHeight="67.0" fitWidth="49.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="260.0" layoutY="311.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
-      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="268.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="210.0" layoutY="313.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
+      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="218.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/id-card.png" />
          </image>
@@ -54,8 +54,8 @@
             <Image url="@../Images/avatar.png" />
          </image>
       </ImageView>
-      <Label layoutX="215.0" layoutY="371.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
-      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="223.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="210.0" layoutY="372.0" prefHeight="32.0" prefWidth="35.0" style="-fx-background-color: #22a86c;" />
+      <ImageView fitHeight="22.0" fitWidth="19.0" layoutX="218.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/schedule.png" />
          </image>

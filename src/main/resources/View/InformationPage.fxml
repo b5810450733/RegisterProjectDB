@@ -72,7 +72,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font></Button>
                   <Button fx:id="viewAllCourse" layoutX="96.0" layoutY="597.0" mnemonicParsing="false" onAction="#viewAllBThandle" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: &quot;#62A9FF&quot;;" text="View All Course" />
-                  <Label fx:id="preTcredit" alignment="CENTER" layoutX="389.0" layoutY="597.0" prefHeight="36.0" prefWidth="99.0" style="-fx-border-color: &quot;#62A9FF&quot;; -fx-border-width: 1.5;" text="Totol Credit" />
+                  <Label fx:id="preTcredit" alignment="CENTER" layoutX="389.0" layoutY="597.0" prefHeight="36.0" prefWidth="99.0" style="-fx-border-color: &quot;#62A9FF&quot;; -fx-border-width: 1.5;" text="Total Credit" />
                   <Label fx:id="bsubject" layoutX="7.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Base: subject" />
                   <Label fx:id="csubject" layoutX="258.0" layoutY="337.0" prefHeight="32.0" prefWidth="230.0" text="Continue: subject" />
                   <Button fx:id="cancleBtn" disable="true" layoutX="9.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleCanclebt" prefHeight="36.0" prefWidth="73.0" style="-fx-background-color: #FF5353;" text="Cancle" />
