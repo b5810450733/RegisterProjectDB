@@ -2,16 +2,11 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
-import Model.AllCourse;
 import Model.Student;
 import Model.Subject;
-import animatefx.animation.FadeIn;
-import animatefx.animation.FadeInLeft;
 import animatefx.animation.Flash;
-import animatefx.animation.Pulse;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,7 +81,7 @@ public class InformationController {
     protected TableColumn<Subject, String> ChooseYear;
 
     @FXML
-    public Button addbt,viewAllCourse,dropbt;
+    public Button addbt,viewAllCourse,dropbt,exitbtninfo;
     @FXML
     protected Button cancleBtn,signout,editInfo;
 
@@ -113,6 +107,12 @@ public class InformationController {
     @FXML
     public void initialize(){
         updateColor(notHard);
+        exitbtninfo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
+            }
+        });
     }
 
     public void handleSignout(ActionEvent event){
