@@ -82,7 +82,7 @@ public class InformationController {
     @FXML
     public Button addbt,viewAllCourse,dropbt;
     @FXML
-    protected Button cancleBtn;
+    protected Button cancleBtn,signout,editInfo;
 
     @FXML
     protected Label fname,lname,Year,tcredit,preTcredit,bsubject,csubject;
@@ -329,9 +329,14 @@ public class InformationController {
         }
     }
 
-    public ObservableList<Subject> getDataSubject() {
-        return dataSubject;
+    @FXML
+    public void handleEdit(ActionEvent event){
+        if (event.getSource().equals(editInfo)){
+            MainController.openRegister(presentStudent);
+        }
     }
+
+
 
     @FXML
     public void handleCanclebt(ActionEvent event){
@@ -453,6 +458,10 @@ public class InformationController {
             e.getStackTrace();
         }
         return false;
+    }
+
+    public ObservableList<Subject> getDataSubject() {
+        return dataSubject;
     }
 
 

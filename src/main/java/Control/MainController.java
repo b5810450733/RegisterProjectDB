@@ -90,18 +90,26 @@ public class MainController{
     @FXML
     public void handleRegister(ActionEvent event){
         if (event.getSource().equals(regisbt)){
-            Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/RegisterPage.fxml")) ;
-            try {
-                stage.setScene(new Scene(loader.load(),670,440));
-                stage.setTitle("Register Page");
-                stage.setResizable(false);
-                RegisterController controller = (RegisterController) loader.getController();
-                controller.stage = stage;
-                stage.show();
-            } catch (IOException e1){
-                e1.printStackTrace();
+            openRegister(null);
+        }
+    }
+
+    public static void openRegister(Student student){
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/View/RegisterPage.fxml")) ;
+        try {
+            stage.setScene(new Scene(loader.load(),670,440));
+            stage.setTitle("Register Page");
+            stage.setResizable(false);
+            RegisterController controller = (RegisterController) loader.getController();
+            if (student != null){
+                controller.setNowLogin(student);
             }
+            controller.stage = stage;
+            stage.show();
+            new BounceInDown(stage.getScene().getRoot()).play();
+        } catch (IOException e1){
+            e1.printStackTrace();
         }
     }
 
@@ -167,14 +175,13 @@ public class MainController{
             stage.initStyle(StageStyle.UNDECORATED);
             AllCourseController controller = (AllCourseController) loader.getController();
             if (student != null){
-                //controller.setInfoComtrol(infocontroller);
                 controller.setLoginStudent(student);
                 controller.setPassedSubject(pass);
                 System.out.println(student);
             }
             controller.setThisStage(stage);
             stage.show();
-            new FadeIn(stage.getScene().getRoot()).play();
+            new SlideInLeft(stage.getScene().getRoot()).play();
         } catch (IOException e1){
             e1.printStackTrace();
         }

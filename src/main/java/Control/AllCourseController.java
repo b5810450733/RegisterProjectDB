@@ -75,6 +75,9 @@ public class AllCourseController {
             @Override
             public void handle(ActionEvent event) {
                 Stage stage = (Stage) exitbtnFromAll.getScene().getWindow();
+                if (loginStudent != null){
+                    loginStudent = null;
+                }
                 stage.close();
             }
         });

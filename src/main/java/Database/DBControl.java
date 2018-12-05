@@ -129,5 +129,27 @@ public class DBControl {
         }
         return updateResult;
     }
+
+    public boolean updateStudent(Student student){
+        boolean updateResult = false;
+        try{
+            String sqlText = "UPDATE Student SET firstName=?,lastName=?,year=? WHERE studentID=?";
+            PreparedStatement prepare = connection.prepareStatement(sqlText);
+            prepare.setString(1,student.getFirstName());
+            prepare.setString(2,student.getLastName());
+            prepare.setString(3,student.getYear());
+            prepare.setString(4,student.getStudentID());
+            if (prepare.executeUpdate() == 1){
+                updateResult = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DBConnect.closeAllConfigure(resultSet,stmt,connection);
+        }
+        return updateResult;
+    }
+
+
 }
 
