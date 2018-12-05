@@ -8,6 +8,7 @@ import Model.Subject;
 import animatefx.animation.FadeIn;
 import animatefx.animation.FadeInLeft;
 import animatefx.animation.Flash;
+import animatefx.animation.Pulse;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
