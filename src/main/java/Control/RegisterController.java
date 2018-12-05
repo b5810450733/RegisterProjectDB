@@ -55,14 +55,16 @@ public class RegisterController {
                 DBControl dbControl1 = DBConnect.openDB();
                 for (Student student:dbControl1.readStudent()) {
                     if (student.getStudentID().equals(id)){
-                        canRegister = false;
+                        if (nowLogin == null){
+                            canRegister = false;
+                        }
                     }
                 }
                 Alert warning = new Alert(Alert.AlertType.WARNING);
                 warning.setTitle("Warning");
                 warning.setHeaderText("");
                 try {
-                    int testId = Integer.parseInt(id);
+                    long testId = Long.parseLong(id);
                     try {
                         if (id.length() == 10 && Double.parseDouble(year)>=1.1 && Double.parseDouble(year) <=4.2 && canRegister
                                 && !idfield.getText().equals("") && !fname.getText().equals("")
@@ -85,6 +87,9 @@ public class RegisterController {
                             }
                             idfield.setStyle("-fx-border-color: green");
                             System.out.println("Complete");
+                            warning.setAlertType(Alert.AlertType.INFORMATION);
+                            warning.setContentText("Update complete, please re-login before use the system.");
+                            warning.show();
                             stage.close();
                         }else{
                             warning.setTitle("Warning");

@@ -48,6 +48,8 @@ public class MainController{
 
     protected Student login;
 
+    protected InformationController informationController;
+
 
 
 
@@ -132,15 +134,17 @@ public class MainController{
                 Stage stage = (Stage) mainPane.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/InformationPage.fxml")) ;
                 try {
-                    stage.setX(40);
+                    stage.setX(75);
                     stage.setY(70);
-                    stage.setScene(new Scene(loader.load(),1000,650));
+                    stage.setScene(new Scene(loader.load(),1001,650));
                     stage.setTitle("Your Information");
                     stage.setResizable(false);
                     InformationController controller = (InformationController) loader.getController();
                     controller.setPresentStudent(login);
+                    informationController = controller;
                     stage.show();
                     openGuideStage();
+                    openBaseSub();
                 } catch (IOException e1){
                     e1.printStackTrace();
                 }
@@ -181,7 +185,7 @@ public class MainController{
             }
             controller.setThisStage(stage);
             stage.show();
-            new SlideInLeft(stage.getScene().getRoot()).play();
+            new FadeInDown(stage.getScene().getRoot()).play();
         } catch (IOException e1){
             e1.printStackTrace();
         }
@@ -192,19 +196,41 @@ public class MainController{
         Stage stage2 = new Stage();
         FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/View/Course.fxml")) ;
         try {
-            stage2.setX(1041);
-            stage2.setY(70);
-            stage2.setScene(new Scene(loader2.load(),370,360));
+            stage2.setX(1076);
+            stage2.setY(71);
+            stage2.setScene(new Scene(loader2.load(),331,360));
             stage2.setTitle("Should Register in this term");
             stage2.setResizable(false);
             CourseController controller = (CourseController) loader2.getController();
             stage2.initStyle(StageStyle.UNDECORATED);
             controller.setNowLogin(login);
+            informationController.courseController = stage2;
             stage2.show();
             new FadeInLeft(stage2.getScene().getRoot()).play();
         } catch (IOException e2){
             e2.printStackTrace();
         }
+    }
+
+    @FXML
+    public void openBaseSub(){
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/BaseAndCon.fxml")) ;
+        try {
+            stage.setX(1076);
+            stage.setY(431);
+            stage.setScene(new Scene(loader.load(),331,289));
+            stage.setResizable(false);
+            BaseAndConController controller = (BaseAndConController) loader.getController();
+            stage.initStyle(StageStyle.UNDECORATED);
+            controller.setShowBase();
+            informationController.baseAndConController = stage;
+            stage.show();
+            new FadeInLeft(stage.getScene().getRoot()).play();
+        } catch (IOException e2){
+            e2.printStackTrace();
+        }
+
     }
 
 }

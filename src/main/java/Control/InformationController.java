@@ -5,6 +5,10 @@ import Database.DBControl;
 import Model.AllCourse;
 import Model.Student;
 import Model.Subject;
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeInLeft;
+import animatefx.animation.Flash;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,8 +24,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -85,12 +91,17 @@ public class InformationController {
     protected Button cancleBtn,signout,editInfo;
 
     @FXML
-    protected Label fname,lname,Year,tcredit,preTcredit,bsubject,csubject;
+    protected Label fname,lname,Year,tcredit,preTcredit,bsubject,csubject,showID;
 
     @FXML
     protected ImageView image;
 
-    private AllCourse allCourse = new AllCourse();
+    @FXML
+    protected AnchorPane informationPane;
+
+    protected Stage courseController;
+    protected Stage baseAndConController;
+
     protected Student presentStudent;
     private  ArrayList<Subject> allSubjects = new ArrayList<>();
     private ObservableList<Subject> dataSubject = FXCollections.observableArrayList();
@@ -103,6 +114,25 @@ public class InformationController {
         updateColor(notHard);
     }
 
+    public void handleSignout(ActionEvent event){
+        presentStudent = null;
+        Stage stage = (Stage) informationPane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainPage.fxml")) ;
+        try {
+            stage.setScene(new Scene(loader.load(),666,475));
+            stage.setResizable(false);
+            MainController controller = (MainController) loader.getController();
+            stage.centerOnScreen();
+            stage.show();
+            new Flash(stage.getScene().getRoot()).play();
+            courseController.close();
+            baseAndConController.close();
+            CourseController.notPassAndCanRegister.clear();
+        } catch (IOException e2){
+            e2.printStackTrace();
+        }
+    }
+
     @FXML
     public void setPresentStudent(Student presentStudent) {
         this.presentStudent = presentStudent;
@@ -111,18 +141,9 @@ public class InformationController {
         fname.setText(presentStudent.getFirstName());
         lname.setText(presentStudent.getLastName());
         Year.setText(presentStudent.getYear());
+        showID.setText(presentStudent.getStudentID());
     }
 
-    @FXML
-    public void setBaseAndContSubject(Subject subject){
-        String bShow = "";
-        String cShow = "";
-        String[] show = allCourse.findSubject(subject);
-        bShow = show[0];
-        cShow = show[1];
-        bsubject.setText(bShow);
-        csubject.setText(cShow);
-    }
 
     @FXML
     public void showImage() {
@@ -267,7 +288,7 @@ public class InformationController {
                             return;
                         }
                         else {
-                            String nameSubject = "\""+ clicked1.getBaseSubject() +" "+allCourse.findBaseName(clicked1)+"\"";
+                            String nameSubject = "\""+ clicked1.getBaseSubject() +" "+findBaseName(clicked1)+"\"";
                             alert = new Alert(Alert.AlertType.WARNING,"You have to Pass "+nameSubject+" Before register "+clicked1.getSubName()+".",ButtonType.OK);
                             alert.setHeaderText("");
                             alert.show();
@@ -462,6 +483,56 @@ public class InformationController {
 
     public ObservableList<Subject> getDataSubject() {
         return dataSubject;
+    }
+
+    public String findBaseName(Subject subject){
+        String name = "";
+        DBControl dbControl = DBConnect.openDB();
+        ArrayList<Subject> subjectList = dbControl.readSubject();
+        for (Subject read : subjectList) {
+            if (read.getSubCode().equals(subject.getBaseSubject())){
+                name = read.getSubName();
+                break;
+            }
+        }
+        return name;
+    }
+
+
+    @FXML
+    public void setBaseAndContSubject(Subject subject){
+        BaseAndConController.baseSub.clear();// BaseSubject
+        try {
+            String[] base = subject.getBaseSubject().split("#");
+            DBControl control = DBConnect.openDB();
+            for (Subject subjectdb:control.readSubject()) {
+                for (int i = 0; i < base.length; i++) {
+                    if (subjectdb.getSubCode().equals(base[i])){
+                        BaseAndConController.baseSub.add(subjectdb);
+                    }
+                }
+            }
+        }
+        catch (NullPointerException e){
+            e.getStackTrace();
+        }
+        BaseAndConController.contSub.clear();// ContinueSubject
+        try {
+            String[] cont = subject.getContSubject().split("#");
+            DBControl control2 = DBConnect.openDB();
+            for (Subject subjectdb:control2.readSubject()) {
+                for (int i = 0; i < cont.length; i++) {
+                    if (subjectdb.getSubCode().equals(cont[i])){
+                        BaseAndConController.contSub.add(subjectdb);
+                    }
+                }
+            }
+        }
+        catch (NullPointerException e){
+            e.getStackTrace();
+        }
+
+
     }
 
 

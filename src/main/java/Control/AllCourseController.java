@@ -58,8 +58,6 @@ public class AllCourseController {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    protected InformationController infocontrol;
-
     @FXML
     protected Button exitbtnFromAll;
 
