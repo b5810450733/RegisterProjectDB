@@ -237,7 +237,7 @@ public class InformationController {
         notSubyear.setCellValueFactory(cellData->cellData.getValue().yearProperty());
         notHard.setCellValueFactory(cellData->cellData.getValue().hardnessProperty());
         notView.setItems(dataNotPassSubject);
-        //notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        notView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         notView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -276,25 +276,36 @@ public class InformationController {
                 }
             }
         });
-//        notView.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if (event.getCode() == KeyCode.ENTER){
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all selected to Pre-Register table?",ButtonType.YES,ButtonType.NO);
-//                    alert.setHeaderText("");
-//                    Optional optional = alert.showAndWait();
-//                    if (optional.get().equals(ButtonType.YES)) {
-//                        ObservableList<Subject> subjectObservableList = notView.getSelectionModel().getSelectedItems();
-//                        dataChooseSubject.addAll(subjectObservableList);
-//                        dataNotPassSubject.removeAll(subjectObservableList);
-//                        updateTotolPreCredit();
-//                        addbt.setDisable(false);
-//                    }else {
-//                        return;
-//                    }
-//                }
-//            }
-//        });
+        notView.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.ENTER){
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to add all selected to Pre-Register table?",ButtonType.YES,ButtonType.NO);
+                    alert.setHeaderText("");
+                    Optional optional = alert.showAndWait();
+                    if (optional.get().equals(ButtonType.YES)) {
+                        ObservableList<Subject> subjectObservableList = notView.getSelectionModel().getSelectedItems();
+                        boolean canAdd = false;
+                        for (Subject subject: subjectObservableList) {
+                            canAdd = checkcanRegis(subject);
+                        }
+                        if (canAdd){
+                            dataChooseSubject.addAll(subjectObservableList);
+                            dataNotPassSubject.removeAll(subjectObservableList);
+                            updateTotolPreCredit();
+                            addbt.setDisable(false);
+                        }
+                        else {
+                            Alert alert1 = new Alert(Alert.AlertType.WARNING,"Cannot add these subject, please check that you already passed base Subject of these subject.");
+                            alert1.setHeaderText("");
+                            alert1.show();
+                        }
+                    }else {
+                        return;
+                    }
+                }
+            }
+        });
         //////////////////////////////////////////////////////////////////////////////////////////
         ChooseID.setCellValueFactory(cellData->cellData.getValue().subCodeProperty());
         ChooseName.setCellValueFactory(cellData->cellData.getValue().subNameProperty());
@@ -405,22 +416,41 @@ public class InformationController {
     }
 
     public boolean checkcanRegis(Subject subject){
-        Boolean can = false;
-        for (Subject pre : dataChooseSubject) {
-            if (pre.getSubCode().equals(subject.getBaseSubject())){
-                can = false;
-            }
-        }
-        if (dataSubject.size()==0 && can == true){
-            return true;
-        }
         if (subject.getBaseSubject() == null){
             return true;
+        }else if (subject.getBaseSubject().length() == 0){
+            return true;
         }
-        for (Subject passed : dataSubject) {
-            if (passed.getSubCode().equals(subject.getBaseSubject())){
-                return true;
+        try {
+            if (subject.getBaseSubject().length() > 0){
+                String[] checkBase = subject.getBaseSubject().split("#");
+                for (Subject pre : dataChooseSubject) {
+                    for (String check : checkBase) {
+                        if (pre.getSubCode().equals(check)){
+                            return false;
+                        }
+                    }
+                }
+                if (dataSubject.size()==0){
+                    return true;
+                }
+                int countBase = checkBase.length;
+                int inPrechoose = 0;
+                for (Subject passed : dataSubject) {
+                    for (String checksub : checkBase) {
+                        if (passed.getSubCode().equals(checksub)){
+                            inPrechoose++;
+                        }
+                    }
+                }
+                if (inPrechoose == countBase){
+                    return true;
+                }
             }
+                return false;
+
+        }catch (NullPointerException e){
+            e.getStackTrace();
         }
         return false;
     }
