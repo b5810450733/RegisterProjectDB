@@ -285,7 +285,7 @@ public class InformationController {
                     setBaseAndContSubject(clicked1);
                 }else if (event.getClickCount() == 2){
                     if (Double.parseDouble(presentStudent.getYear()) < (Double.parseDouble(clicked1.getYear()))){
-                        Alert alert = new Alert(Alert.AlertType.WARNING,"This course is not available because your year is not reached.",ButtonType.OK);
+                        Alert alert = new Alert(Alert.AlertType.WARNING,"This subject is not available because your year is not reached.",ButtonType.OK);
                         alert.setHeaderText("");
                         alert.show();
 
@@ -434,17 +434,21 @@ public class InformationController {
                     ButtonType.YES,ButtonType.NO);
             newAlert.setHeaderText("");
             Optional optional = newAlert.showAndWait();
-            for (Subject subject : dataChooseSubject) {
-                if (!dataSubject.contains(subject) && optional.get().equals(ButtonType.YES) && !dataChooseSubject.isEmpty()){
-                    subject.setIsPass("Passed");
-                    dataSubject.add(subject);
-                    CourseController.updateList(subject,1);
-                    updateRegister();
+            if (optional.get().equals(ButtonType.NO)){
+                return;
+            }else if (optional.get().equals(ButtonType.YES)) {
+                for (Subject subject : dataChooseSubject) {
+                    if (!dataSubject.contains(subject) && !dataChooseSubject.isEmpty()) {
+                        subject.setIsPass("Passed");
+                        dataSubject.add(subject);
+                        CourseController.updateList(subject, 1);
+                        updateRegister();
+                    }
                 }
+                preTcredit.setText("");
+                dataChooseSubject.clear();
+                addbt.setDisable(true);
             }
-            preTcredit.setText("");
-            dataChooseSubject.clear();
-            addbt.setDisable(true);
         }else{
             return;
         }
@@ -474,7 +478,7 @@ public class InformationController {
                         }
                     }
                 }
-                if (dataSubject.size()==0){
+                if (dataSubject.size()==0 && checkBase.length == 0){
                     return true;
                 }
                 int countBase = checkBase.length;

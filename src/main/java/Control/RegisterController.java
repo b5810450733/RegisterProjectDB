@@ -96,6 +96,9 @@ public class RegisterController {
                                 Student newStudent = new Student(id,firstName,lastName,year);
                                 newStudent.setRegistersubject("");
                                 System.out.println(dbControl.addStudent(newStudent));
+                                warning.setAlertType(Alert.AlertType.INFORMATION);
+                                warning.setContentText("Register complete, you can login now.");
+                                warning.show();
                             }
                             if (nowLogin != null){
                                 DBControl dbControl2 = DBConnect.openDB();
@@ -104,13 +107,12 @@ public class RegisterController {
                                 nowLogin.setYear(year);
                                 System.out.println(dbControl2.updateStudent(nowLogin));
                                 nowLogin = null;
-                                stage.close();
+                                warning.setAlertType(Alert.AlertType.INFORMATION);
+                                warning.setContentText("Update complete, please re-login before use the system.");
+                                warning.show();
                             }
                             idfield.setStyle("-fx-border-color: green");
                             System.out.println("Complete");
-                            warning.setAlertType(Alert.AlertType.INFORMATION);
-                            warning.setContentText("Update complete, please re-login before use the system.");
-                            warning.show();
                             stage.close();
                         }else{
                             warning.setTitle("Warning");
