@@ -31,6 +31,5 @@ public class Main extends Application {
         this.stage = primaryStage;
         primaryStage.show();
         new FadeIn(root).play();
-        primaryStage.setOnCloseRequest(e -> Platform.exit());
     }
 }
