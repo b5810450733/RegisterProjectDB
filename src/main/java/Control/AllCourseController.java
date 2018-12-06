@@ -88,7 +88,7 @@ public class AllCourseController {
     public void setPassedSubject(ObservableList<Subject> passedSubject) {
         this.passedSubject = passedSubject;
         for (Subject subject : this.passedSubject) {
-            System.out.println(subject.getIsPass()+"jkjk");
+            System.out.println(subject.getIsPass());
         }
         if (loginStudent != null){
             showAllSubject("all");
