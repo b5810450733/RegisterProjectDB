@@ -18,7 +18,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="-15.0" prefHeight="46.0" prefWidth="509.0" style="-fx-background-color: #22a86c;" />
-                  <TableView fx:id="passView" editable="true" layoutX="6.0" layoutY="53.0" prefHeight="315.0" prefWidth="481.0">
+                  <TableView fx:id="passView" editable="true" layoutX="6.0" layoutY="53.0" prefHeight="288.0" prefWidth="481.0">
                     <columns>
                       <TableColumn fx:id="PassSubID" prefWidth="94.0" text="Subject ID" />
                       <TableColumn fx:id="PassSubname" prefWidth="194.3683319091797" text="Subject Name" />
@@ -49,9 +49,9 @@
                         <Font size="14.0" />
                      </font></Label>
                   <Line endX="393.0000305175781" layoutX="103.0" layoutY="378.0" startX="-107.00001525878906" stroke="#8f854762" strokeWidth="2.2" />
-                  <Button fx:id="dropbt" disable="true" layoutX="423.0" layoutY="607.0" mnemonicParsing="false" onAction="#handleDropbtn" prefHeight="27.0" prefWidth="61.0" style="-fx-background-color: &quot;#FF5353&quot;; -fx-background-radius: 0 0 0 0;" text="Drop" textFill="WHITE" />
-                  <Button fx:id="signout" layoutX="13.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleSignout" prefHeight="36.0" prefWidth="92.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #FF5353;" text="Sign Out" textFill="WHITE" />
-                  <Button fx:id="editInfo" layoutX="119.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="36.0" prefWidth="162.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: &quot;#62A9FF&quot;;" text="Edit your Information" textFill="WHITE">
+                  <Button fx:id="dropbt" disable="true" layoutX="414.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleDropbtn" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: &quot;#FF5353&quot;; -fx-background-radius: 0 0 0 0;" text="Drop" textFill="WHITE" />
+                  <Button fx:id="signout" layoutX="13.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleSignout" prefHeight="36.0" prefWidth="80.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: #FF5353;" text="Sign Out" textFill="WHITE" />
+                  <Button fx:id="editInfo" layoutX="110.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="36.0" prefWidth="159.0" style="-fx-background-radius: 0 0 0 0; -fx-background-color: &quot;#62A9FF&quot;;" text="Edit your Information" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
@@ -89,6 +89,11 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Label fx:id="clockText" alignment="CENTER" layoutX="286.0" layoutY="598.0" prefHeight="36.0" prefWidth="201.0" style="-fx-border-color: #22a86c;" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="566.0">
@@ -116,9 +121,9 @@
                         <TableColumn fx:id="ChooseYear" prefWidth="63.0" text="Year" />
                     </columns>
                   </TableView>
-                  <Button fx:id="addbt" disable="true" layoutX="233.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="36.0" prefWidth="147.0" style="-fx-background-color: #03F3AB; -fx-background-radius: 0 0 0 0;" text="Add to Pass List" textFill="WHITE">
+                  <Button fx:id="addbt" disable="true" layoutX="233.0" layoutY="598.0" mnemonicParsing="false" onAction="#handleAddPass" prefHeight="36.0" prefWidth="147.0" style="-fx-background-color: #00d696; -fx-background-radius: 0 0 0 0;" text="Add to Pass List" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font></Button>
                   <Button fx:id="viewAllCourse" layoutX="91.0" layoutY="598.0" mnemonicParsing="false" onAction="#viewAllBThandle" prefHeight="36.0" prefWidth="132.0" style="-fx-background-color: &quot;#62A9FF&quot;; -fx-background-radius: 0 0 0 0;" text="View All Course" textFill="WHITE">
                      <font>

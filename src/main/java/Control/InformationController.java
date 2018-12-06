@@ -5,6 +5,9 @@ import Database.DBControl;
 import Model.Student;
 import Model.Subject;
 import animatefx.animation.Flash;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,8 +26,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -86,7 +92,7 @@ public class InformationController {
     protected Button cancleBtn,signout,editInfo;
 
     @FXML
-    protected Label fname,lname,Year,tcredit,preTcredit,bsubject,csubject,showID;
+    protected Label fname,lname,Year,tcredit,preTcredit,showID,clockText;
 
     @FXML
     protected ImageView image;
@@ -106,6 +112,16 @@ public class InformationController {
 
     @FXML
     public void initialize(){
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String time = now.format(formatter);
+            clockText.setText(time);
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
         updateColor(notHard);
         exitbtninfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -532,8 +548,6 @@ public class InformationController {
         catch (NullPointerException e){
             e.getStackTrace();
         }
-
-
     }
 
 
