@@ -1,0 +1,177 @@
+//
+//    public boolean updateList(Income list){
+//        boolean updateResult = false;
+//        try{
+//            String sqlText = "UPDATE Income SET type=?,info=?,value=? WHERE id=?";
+//            PreparedStatement prepare = connection.prepareStatement(sqlText);
+//            prepare.setString(1,list.getType());
+//            prepare.setString(2,list.getInformation());
+//            prepare.setDouble(3,Double.parseDouble(list.getAmount()));
+//            prepare.setInt(4,list.getID());
+//
+//            if (prepare.executeUpdate() == 1){
+//                updateResult = true;
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }finally {
+//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
+//        }
+//        return updateResult;
+//    }
+//
+//    public boolean deleteList(Income list){
+//        boolean updateResult = false;
+//        try{
+//            String sqlText = "DELETE FROM Income WHERE id=?";
+//            PreparedStatement prepare = connection.prepareStatement(sqlText);
+//            prepare.setInt(1,list.getID());
+//
+//            if (prepare.executeUpdate() == 1){
+//                updateResult = true;
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }finally {
+//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
+//        }
+//        return updateResult;
+//    }
+//
+//    public int getLastID(){
+//        int lastID = 0;
+//        try{
+//            stmt = connection.createStatement();
+//            String query = "SELECT * FROM Income ORDER BY id DESC LIMIT 1;";
+//            resultSet = stmt.executeQuery(query);
+//            while (resultSet.next()){
+//                lastID = resultSet.getInt(1);
+//            }
+//        }catch (SQLException e){
+//            e.printStackTrace();
+//        }finally {
+//            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
+//        }
+//        return lastID;
+//
+//    }
+//
+//}
+
+
+
+//////////////////////////////////////////CSS///////////////////////////////////////////////////////
+@FXML
+    public void updateColor(){
+        notHard.setCellFactory(column -> {
+            return new TableCell<Subject, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty); //This is mandatory
+
+                    if (item == null || empty) { //If the cell is empty
+                        setText(null);
+                        setStyle("");
+                    } else { //If the cell is not empty
+
+                        setText(item); //Put the String data in the cell , set to null
+
+                        //We get here all the info of the Person of this row
+                        Subject auxPerson = getTableView().getItems().get(getIndex());
+
+                        // Style all persons wich name is "Edgard"
+                        if (auxPerson.getHardness().equals("3")) {
+                            //setTextFill(Color.RED); //The text in red
+                            setStyle("-fx-background-color: red"); //The background of the cell in yellow
+                        } else {
+                            //Here I see if the row of this cell is selected or not
+                            if(getTableView().getSelectionModel().getSelectedItems().contains(auxPerson))
+                                setTextFill(Color.WHITE);
+                            else
+                                setTextFill(Color.BLACK);
+                        }if (auxPerson.getHardness().equals("2")) {
+                            //setTextFill(Color.RED); //The text in red
+                            setStyle("-fx-background-color: blue"); //The background of the cell in yellow
+                        } else {
+                            //Here I see if the row of this cell is selected or not
+                            if(getTableView().getSelectionModel().getSelectedItems().contains(auxPerson))
+                                setTextFill(Color.WHITE);
+                            else
+                                setTextFill(Color.BLACK);
+                        } if (auxPerson.getHardness().equals("1")) {
+                            //setTextFill(Color.BLUE); //The text in red
+                            setStyle("-fx-background-color: green"); //The background of the cell in yellow
+
+                        } else {
+                            //Here I see if the row of this cell is selected or not
+                            if(getTableView().getSelectionModel().getSelectedItems().contains(auxPerson))
+                                setTextFill(Color.WHITE);
+                            else
+                                setTextFill(Color.BLACK);
+                        }
+                    }
+                }
+            };
+        });
+    }
+
+
+
+///////////////////////////////////////////////FX////////////////////////////////////////////////////
+//((Node)(event.getSource())).getScene().getWindow().hide();
+
+
+//////////////////// EVENT //////////////////////
+notView.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                Subject clicked1 = notView.getSelectionModel().getSelectedItem();
+                if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.UP){
+                    bsubject.setText(clicked1.getSubName());
+                    csubject.setText(clicked1.getCreDit());
+                }
+            }
+        });
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+for (int i = 0; i < toShownotPass.size(); i++) {
+
+                for (int j = 0; j < subjectforStudent.length; j++) {
+
+                    if (subjectforStudent[j].equals(toShownotPass.get(i).getSubCode())){
+
+                        System.out.println(subjectforStudent[j]);
+
+                        Subject studentSubject = new Subject(toShownotPass.get(i).getSubCode(),toShownotPass.get(i).getSubName(),
+                                toShownotPass.get(i).getCreDit(),toShownotPass.get(i).getHardness(),toShownotPass.get(i).getYear());
+
+                        dataSubject.add(studentSubject);
+
+                        totalCredit += Integer.parseInt(toShownotPass.get(i).getCreDit());
+
+                        toShownotPass.remove(studentSubject); ถ้าใส่ i จะ bug
+                    }
+                }
+            }
+
+
+ //////////////////////////////////////////////////////////////////////////////////////////////////////
+            for (Subject read : subjectList) {
+                            for (int i = 0; i < more.length; i++) {
+                                if (read.getSubCode().equals(more[i])){
+                                    name[0] = read.getSubName();
+                                }
+                                if (read.getSubCode().equals(subject.getContSubject())){
+                                    name[1] = read.getSubName();
+                                }
+                            }
+                        }
+
+
+
+                        //        if (subject.getBaseSubject() == null || subject.getBaseSubject().length() == 0 || name[0] == null){
+                        //            name[0] = "No Base Subject";
+                        //        }
+                        //        if (subject.getContSubject()==null || subject.getContSubject().length() == 0 ||name[1] == null){
+                        //            name[1] = "No Continue Subject";
+                        //        }
