@@ -43,7 +43,7 @@ public class RegisterController {
     private double yOffset = 0;
 
     public void initialize(){
-        makeStageDrageable();
+        makeStageDrageable(); // make slide
 
         exitregister.setOnAction(new EventHandler<ActionEvent>() {
             @Override
