@@ -2,11 +2,9 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
-import Launcher.Main;
 import Model.Student;
 import Model.Subject;
 import animatefx.animation.*;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,16 +73,16 @@ public class MainController{
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Main.stage.setX(event.getScreenX() - xOffset);
-                Main.stage.setY(event.getScreenY() - yOffset);
-                Main.stage.setOpacity(0.7f);
+                Launcher.Main.stage.setX(event.getScreenX() - xOffset);
+                Launcher.Main.stage.setY(event.getScreenY() - yOffset);
+                Launcher.Main.stage.setOpacity(0.7f);
             }
         });
         pane.setOnDragDone((e) -> {
-            Main.stage.setOpacity(1.0f);
+            Launcher.Main.stage.setOpacity(1.0f);
         });
         pane.setOnMouseReleased((e) -> {
-            Main.stage.setOpacity(1.0f);
+            Launcher.Main.stage.setOpacity(1.0f);
         });
     }
 

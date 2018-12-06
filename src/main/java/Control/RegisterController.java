@@ -2,7 +2,6 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
-import Launcher.Main;
 import Model.Student;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,7 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import java.sql.Connection;
+
 import java.util.Optional;
 
 public class RegisterController {

@@ -2,10 +2,8 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
-import Launcher.Main;
 import Model.Student;
 import Model.Subject;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
