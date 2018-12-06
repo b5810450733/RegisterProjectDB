@@ -104,6 +104,7 @@ public class MainController{
             stage.setTitle("Register Page");
             stage.setResizable(false);
             RegisterController controller = (RegisterController) loader.getController();
+            stage.initStyle(StageStyle.UNDECORATED);
             if (student != null){
                 controller.setNowLogin(student);
             }

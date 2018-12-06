@@ -8,51 +8,60 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="440.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.RegisterController">
+<AnchorPane fx:id="regisAnchor" prefHeight="440.0" prefWidth="670.0" style="-fx-background-color: #2d2f31;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.RegisterController">
    <children>
-      <ImageView fitHeight="440.0" fitWidth="670.0" pickOnBounds="true">
-         <image>
-            <Image url="@../Images/pastel1.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="178.0" layoutY="39.0" prefHeight="75.0" prefWidth="304.0" style="-fx-border-color: #FACC2E#FACC2E #FACC2E#FACC2E; -fx-border-width: 2;" text="Register your ID to login" textFill="#ff006c">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </Label>
-      <TextField fx:id="idfield" layoutX="290.0" layoutY="151.0" prefHeight="27.0" prefWidth="192.0" promptText="Your ID" />
-      <TextField fx:id="fname" layoutX="290.0" layoutY="204.0" prefHeight="27.0" prefWidth="192.0" promptText="First Name" />
-      <TextField fx:id="lname" layoutX="290.0" layoutY="261.0" prefHeight="27.0" prefWidth="192.0" promptText="Last Name" />
-      <TextField fx:id="yearfield" layoutX="290.0" layoutY="319.0" prefHeight="27.0" prefWidth="192.0" promptText="Example: 2-1" />
-      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="151.0" prefHeight="27.0" prefWidth="92.0" text="Student ID :">
+      <TextField fx:id="idfield" layoutX="290.0" layoutY="157.0" prefHeight="27.0" prefWidth="192.0" promptText="Your ID" style="-fx-text-inner-color: #FFFFFF; -fx-background-color: #505050;" />
+      <TextField fx:id="fname" layoutX="290.0" layoutY="211.0" prefHeight="27.0" prefWidth="192.0" promptText="First Name" style="-fx-background-color: #505050; -fx-text-inner-color: #FFFFFF;" />
+      <TextField fx:id="lname" layoutX="290.0" layoutY="267.0" prefHeight="27.0" prefWidth="192.0" promptText="Last Name" style="-fx-background-color: #505050; -fx-text-inner-color: #FFFFFF;" />
+      <TextField fx:id="yearfield" layoutX="290.0" layoutY="324.0" prefHeight="27.0" prefWidth="192.0" promptText="Example: 2.1" style="-fx-background-color: #505050; -fx-text-inner-color: #FFFFFF;" />
+      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="157.0" prefHeight="27.0" prefWidth="92.0" text="Student ID :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="204.0" prefHeight="27.0" prefWidth="92.0" text="First Name :">
+      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="211.0" prefHeight="27.0" prefWidth="92.0" text="First Name :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="261.0" prefHeight="27.0" prefWidth="92.0" text="Last Name :">
+      <Label alignment="CENTER_RIGHT" layoutX="178.0" layoutY="267.0" prefHeight="27.0" prefWidth="92.0" text="Last Name :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label alignment="CENTER_RIGHT" layoutX="209.0" layoutY="319.0" prefHeight="27.0" prefWidth="61.0" text="Year :">
+      <Label alignment="CENTER_RIGHT" layoutX="171.0" layoutY="324.0" prefHeight="27.0" prefWidth="99.0" text="Year Ex.(2.1) :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="clearbt" layoutX="290.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleRegisterbutton" prefHeight="27.0" prefWidth="54.0" style="-fx-cursor: Hand;" text="Clear" textFill="#d73838">
+      <Button fx:id="clearbt" layoutX="290.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleRegisterbutton" prefHeight="27.0" prefWidth="54.0" style="-fx-cursor: Hand; -fx-background-radius: 0 0 0 0; -fx-background-color: #FF5353;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="submitbt" defaultButton="true" layoutX="390.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleRegisterbutton" prefHeight="27.0" prefWidth="92.0" style="-fx-cursor: Hand;" text="Submit" textFill="#319a08">
+      <Button fx:id="submitbt" defaultButton="true" layoutX="390.0" layoutY="365.0" mnemonicParsing="false" onAction="#handleRegisterbutton" prefHeight="27.0" prefWidth="92.0" style="-fx-cursor: Hand; -fx-background-radius: 0 0 0 0; -fx-background-color: #22a86c;" text="Submit" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
+      </Button>
+      <Label alignment="CENTER" prefHeight="63.0" prefWidth="670.0" style="-fx-background-color: #22a86c;" text="Register   your   ID   to   login" textFill="WHITE">
+         <font>
+            <Font name="Waseem Regular" size="27.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="51.0" fitWidth="54.0" layoutX="319.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/resume-5.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitregister" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="25.0" style="-fx-background-color: #22a86c;">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/error.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

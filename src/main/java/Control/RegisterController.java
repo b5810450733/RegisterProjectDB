@@ -2,10 +2,13 @@ package Control;
 
 import Database.DBConnect;
 import Database.DBControl;
+import Launcher.Main;
 import Model.Student;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.sql.Connection;
@@ -28,11 +31,28 @@ public class RegisterController {
     private Button clearbt;
 
     @FXML
-    private Button submitbt;
+    private Button submitbt,exitregister;
+
+    @FXML
+    protected AnchorPane regisAnchor;
 
     protected Student nowLogin;
 
     protected Stage stage;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    public void initialize(){
+        makeStageDrageable();
+
+        exitregister.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                stage.close();
+            }
+        });
+    }
 
     public void handleRegisterbutton(ActionEvent event){
         Button register = (Button) event.getSource();
@@ -66,6 +86,7 @@ public class RegisterController {
                 try {
                     long testId = Long.parseLong(id);
                     try {
+                        idfield.setStyle("-fx-border-color: green");
                         if (id.length() == 10 && Double.parseDouble(year)>=1.1 && Double.parseDouble(year) <=4.2 && canRegister
                                 && !idfield.getText().equals("") && !fname.getText().equals("")
                                 && !lname.getText().equals("") && !yearfield.getText().equals("")){
@@ -123,7 +144,7 @@ public class RegisterController {
                         warning.show();
                     }
                 }catch (NumberFormatException e){
-                    warning.setContentText("ID must contain be only 10 digits Integer.");
+                    warning.setContentText("ID must contain be only 10 digits Integer, try to complete the form again.");
                     idfield.setStyle("-fx-border-color: red");
                     warning.show();
                 }
@@ -154,5 +175,29 @@ public class RegisterController {
     public void setNowLogin(Student nowLogin) {
         this.nowLogin = nowLogin;
         setUpstudent();
+    }
+
+    private void makeStageDrageable() {
+        regisAnchor.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        regisAnchor.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.7f);
+            }
+        });
+        regisAnchor.setOnDragDone((e) -> {
+            stage.setOpacity(1.0f);
+        });
+        regisAnchor.setOnMouseReleased((e) -> {
+            stage.setOpacity(1.0f);
+        });
     }
 }
